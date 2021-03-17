@@ -1,0 +1,11 @@
+node_modules
+.next
+.settings
+etc
+nbproject
+psd
+setup
+target
+*.stories.js
+*.test.js
+build

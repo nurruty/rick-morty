@@ -1,0 +1,66 @@
+@import '../../scss/variables.scss';
+
+.Icon {
+  display: inline-flex;
+  display: -ms-inline-flexbox;
+  position: relative;
+
+  &-svg {
+    width: 51px;
+    height: 51px;
+    position: relative;
+    transform: translate(0, 0);
+    z-index: 5;
+  }
+
+  &-counter {
+    position: absolute;
+    border-radius: 50%;
+    background-color: $gray-medium;
+    width: 18px;
+    height: 17px;
+    right: 5px;
+    z-index: 10;
+    font-size: 10px;
+    color: $white;
+  }
+
+  &_nano {
+    width: 38.25px;
+    height: 38.25px;
+
+    transform: scale(0.6);
+  }
+
+  &_mini {
+    width: 41px;
+    height: 41px;
+    transform: scale(0.7);
+  }
+
+  &_primary,
+  &_primary path {
+    fill: $blue;
+  }
+
+  &_secondary,
+  &_secondary path {
+    fill: $gray;
+  }
+
+  &_white,
+  &_white path {
+    fill: $white;
+  }
+
+  &_blue,
+  &_blue path {
+    fill: $blue;
+  }
+
+  &-border {
+    &_blue path {
+      stroke: $blue;
+    }
+  }
+}

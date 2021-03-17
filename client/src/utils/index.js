@@ -11,4 +11,11 @@ const appEnv = () => {
   return devEnvMap[window.location.hostname] || 'production';
 };
 
-export { appEnv };
+/**
+ * Checks if the current viewport is a mobile one.
+ *
+ * @returns {Boolean} Boolean
+ */
+const isMobile = () => window.innerWidth < 769;
+
+export { appEnv, isMobile };

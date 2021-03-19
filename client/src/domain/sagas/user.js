@@ -4,10 +4,10 @@ import { getCurrentUserService } from '../services/user';
 
 function* getCurrentUser() {
   try {
-    const songs = yield call(getCurrentUserService);
-    yield put({ type: userActionTypes.GET_CURRENT_USER_SUCCEDED, payload: songs });
+    const user = yield call(getCurrentUserService);
+    yield put({ type: userActionTypes.GET_CURRENT_USER_SUCCEDED, payload: { user } });
   } catch (e) {
-    yield put({ type: userActionTypes.GET_CURRENT_USER_FAILED, payload: e.message });
+    yield put({ type: userActionTypes.GET_CURRENT_USER_FAILED, payload: { error: e } });
   }
 }
 

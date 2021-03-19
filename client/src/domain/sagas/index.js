@@ -4,7 +4,7 @@ import { watchGetCurrentUser, watchLoginUser, watchSignUpUser } from './user';
 import { watchUpdateFavouriteCharacter } from './characters';
 
 const sagas = function* () {
-  yield all([watchGetCurrentUser()]);
+  yield all([watchGetCurrentUser(), watchGetCharacters()]);
 };
 
 export default sagas;

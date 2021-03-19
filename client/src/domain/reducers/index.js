@@ -3,8 +3,8 @@ import charactersReducer from './characters';
 import userReducer from './user';
 
 const rootReducer = Redux.combineReducers({
-  characters: charactersReducer,
-  user: userReducer,
+  charactersState: charactersReducer,
+  userState: userReducer,
 });
 
 export default rootReducer;

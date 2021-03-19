@@ -16,7 +16,7 @@ const charactersActionTypes = {
   DELETE_FAVOURITE_CHARACTER_FAILED: 'DELETE_FAVOURITE_CHARACTER_FAILED',
 };
 
-const charactersActions = {
+const charactersActionsCreators = {
   getCharactersRequested: () => ({
     type: charactersActionTypes.GET_CHARACTERS_REQUESTED,
   }),
@@ -63,10 +63,7 @@ const charactersActions = {
   deleteFavouriteCharacterFailed: (error) => ({
     type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_FAILED,
     payload: error,
-  })
-}
+  }),
+};
 
-export {
-  charactersActionTypes,
-  charactersActions
-}
+export { charactersActionTypes, charactersActionsCreators };

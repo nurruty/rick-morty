@@ -4,18 +4,17 @@ import Home from './pages/home';
 import Routes from './pages/routes';
 import Icon from './components/Icon/Icon';
 // import SearchBar from './components/SearchBar/SearchBar';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { isMobile } from '../utils';
 import { useEffect, useState } from 'react';
-import { userActions } from '../domain/actions/user';
+import { userActionCreators } from '../domain/actions/user';
+import useBindActionCreator from './hooks/useBindActionCreators';
+import userSelector from '../domain/selectors/user';
+import useUser from './hooks/useUser';
 
-function AppComponent({ user, dispatch }) {
+function AppComponent(props) {
   //const [state, setState] = useState({ isMobileSize: isMobile() });
-  const { user: userEntity, userLoading = false } = user;
-
-  useEffect(() => {
-    !userEntity && userLoading && dispatch(userActions.getCurrentUser());
-  }, [userEntity]);
+  const [, , isLoggedIn] = useUser();
 
   // const handleResize = () => {
   //   const isMobileSize = isMobile();
@@ -23,14 +22,6 @@ function AppComponent({ user, dispatch }) {
   //     setState({ isMobileSize });
   //   }
   // };
-
-  useEffect(() => {
-    // window.addEventListener('resize', handleResize);
-  }, []);
-
-  const handleGetSongs = (artist) => {
-    //dispatch(getSongs({ artist }));
-  };
 
   return (
     <div className="App">

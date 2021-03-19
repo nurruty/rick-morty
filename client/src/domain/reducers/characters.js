@@ -2,7 +2,7 @@ import { charactersActionTypes } from '../actions/characters';
 
 const initialState = {
   charactersLoading: false,
-  characters: null,
+  characters: {},
   charactersEerror: null,
 };
 

@@ -1,21 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './home';
-import Login from './login';
-import Signup from './signup';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import HomePage from './home';
+import LoginPage from './login';
 import Character from './character';
-import Error404 from './error';
+import Error404Page from './error';
+import useUser from '../hooks/useUser';
 
-const Routes = () => (
-  <Router>
-    <Switch>
-      <Route path="/character/:charcaterId" component={Character} />
-      {/* <Route path="/login" component={Login} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/404" component={Error404} />
-      <Route path="/" component={Home} /> */}
-    </Switch>
-  </Router>
-);
+const Routes = () => {
+  const [, , isLoggedId] = useUser();
+
+  return (
+    <Router>
+      <Switch>
+        {/* {!isLoggedId && <Redirect to="/login" />} */}
+        <Route path="/character/:charcaterId" component={Character} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/error404" component={Error404Page} />
+        <Route path="/" component={HomePage} />
+      </Switch>
+    </Router>
+  );
+};
 
 export default Routes;

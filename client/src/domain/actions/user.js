@@ -12,9 +12,8 @@ const userActionTypes = {
   SIGNUP_USER_FAILED: 'SIGNUP_USER_FAILED',
 };
 
-const userActions = {
-  getCurrentUser: () => {
-    console.log('CURRENT');
+const userActionCreators = {
+  getCurrentUserRequested: () => {
     return {
       type: userActionTypes.GET_CURRENT_USER_REQUESTED,
     };
@@ -57,4 +56,4 @@ const userActions = {
   }),
 };
 
-export { userActionTypes, userActions };
+export { userActionTypes, userActionCreators };

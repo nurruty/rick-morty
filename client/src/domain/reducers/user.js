@@ -2,7 +2,11 @@ import { userActionTypes } from '../actions/user';
 
 const initialState = {
   userLoading: false,
-  user: null,
+  user: {
+    userName: undefined,
+    email: undefined,
+    isLoggedIn: false,
+  },
   userEerror: null,
 };
 

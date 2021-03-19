@@ -1,10 +1,9 @@
 import { all } from 'redux-saga/effects';
-import { watchGetCharacters } from './characters';
-import { watchGetCurrentUser, watchLoginUser, watchSignUpUser } from './user';
-import { watchUpdateFavouriteCharacter } from './characters';
+import { watchGetCharacters, watchGetCharacter } from './characters';
+import { watchGetCurrentUser, watchLoginUser } from './user';
 
 const sagas = function* () {
-  yield all([watchGetCurrentUser(), watchGetCharacters()]);
+  yield all([watchGetCurrentUser(), watchGetCharacters(), watchGetCharacter(), watchLoginUser()]);
 };
 
 export default sagas;

@@ -3,74 +3,69 @@
 .Card {
   box-shadow: 0 2px 0px 0px rgba(0, 0, 0, 0.0694657);
   transition: 0.3s;
-  width: 250px;
+  width: 100%;
   padding: 0;
-  border: 1px solid $gray-light;
+  border: 1px solid $gray-dark;
   cursor: pointer;
-  height: 350px;
-  background-color: $white;
+  height: 150px;
+  background-color: $gray-dark;
+  display: flex;
+  border-radius: 3%;
+  overflow: hidden;
 
-  img {
-    width: 100%;
-    height: 150px;
-    object-fit: fill;
+  &-img {
+    width: 45%;
+
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: fill;
+    }
   }
 
-  &-title {
-    @include opensans();
-    padding: 20px 15px;
-    font-size: 20px;
-    font-weight: 500;
+  &-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: left;
-    height: 25px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    padding: 15px 10px;
+    color: $white;
   }
+}
 
-  &-album {
-    @include opensans();
-    padding: 15px;
-    font-size: 16px;
-    text-align: left;
-    color: $gray-dark;
-    height: 30px;
-  }
+.Card-Character {
+  @include opensans();
 
-  &-icon {
-    float: right;
+  &-main {
+    margin-bottom: 10px;
+    &-title {
+      font-size: 14px;
 
-    .Icon {
-      position: relative;
-      top: 25px;
-      right: 20px;
-      border-color: $blue;
+      font-weight: 700;
+    }
+    &-subtitle {
+      font-size: 10px;
     }
   }
 
-  &_mobile {
-    height: 250px;
-    width: 350px;
-
-    .Card-img {
-      height: 80px;
-
-      img {
-        height: 80px;
-        object-fit: cover;
-      }
+  &-middle {
+    margin-bottom: 10px;
+    &-title {
+      font-size: 10px;
+      color: $gray;
     }
-
-    .Card-title {
-      height: 15px;
+    &-subtitle {
+      font-size: 11px;
     }
+  }
 
-    .Card-album {
-      height: 20px;
+  &-bottom {
+    &-title {
+      font-size: 10px;
+      color: $gray;
     }
-
-    .Icon {
-      top: 15px;
+    &-subtitle {
+      font-size: 11px;
     }
   }
 }

@@ -13,7 +13,7 @@ const Routes = () => {
     <Router>
       <Switch>
         {/* {!isLoggedId && <Redirect to="/login" />} */}
-        <Route path="/character/:charcaterId" component={Character} />
+        <Route path="/character/:characterId" component={Character} />
         <Route path="/login" component={LoginPage} />
         <Route path="/error404" component={Error404Page} />
         <Route path="/" component={HomePage} />

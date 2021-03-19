@@ -1,0 +1,45 @@
+@import '../../scss/variables.scss';
+
+.TextRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  color: $white;
+
+  &-title {
+    font-size: 10px;
+    color: $gray;
+  }
+  &-subtitle {
+    font-size: 11px;
+  }
+
+  &-medium {
+    .TextRow {
+      &-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: $white;
+      }
+
+      &-subtitle {
+        font-size: 10px;
+      }
+    }
+  }
+
+  &-big {
+    .TextRow {
+      &-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: $white;
+      }
+
+      &-subtitle {
+        font-size: 16px;
+      }
+    }
+  }
+}

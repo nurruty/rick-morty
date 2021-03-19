@@ -14,7 +14,7 @@ const useCharacters = () => {
     !numCharacters && !charactersLoading && charactersActions.getCharactersRequested();
   }, [numCharacters]);
 
-  return [characters];
+  return [Object.values(characters)];
 };
 
 export default useCharacters;

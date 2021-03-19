@@ -1,6 +1,6 @@
 import { charactersActionTypes } from '../actions/characters';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getCharactersService } from '../services/characters';
+import { getCharactersService, getCharacterService } from '../services/characters';
 
 function* getCharacters() {
   try {
@@ -11,8 +11,21 @@ function* getCharacters() {
   }
 }
 
+function* getCharacter() {
+  try {
+    const character = yield call(getCharacterService);
+    yield put({ type: charactersActionTypes.GET_CHARACTER_SUCCEDED, payload: { character } });
+  } catch (e) {
+    yield put({ type: charactersActionTypes.GET_CHARACTER_FAILED, payload: { error: e } });
+  }
+}
+
 const watchGetCharacters = function* () {
   yield takeLatest(charactersActionTypes.GET_CHARACTERS_REQUESTED, getCharacters);
 };
 
-export { watchGetCharacters };
+const watchGetCharacter = function* () {
+  yield takeLatest(charactersActionTypes.GET_CHARACTER_REQUESTED, getCharacter);
+};
+
+export { watchGetCharacters, watchGetCharacter };

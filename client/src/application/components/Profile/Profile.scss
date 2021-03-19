@@ -1,0 +1,34 @@
+@import '../../scss/variables.scss';
+
+.Profile {
+  padding: $layout-padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $gray-dark;
+
+  &-main {
+    display: flex;
+  }
+
+  &-info {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    padding: 15px 10px;
+    color: $white;
+
+    .TextRow {
+      margin: 20px 0;
+    }
+  }
+
+  &-extra {
+    flex-grow: 1;
+    border: 1px solid white;
+    border-radius: 1%;
+    padding: 21px;
+  }
+}

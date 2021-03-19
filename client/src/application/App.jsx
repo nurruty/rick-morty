@@ -25,6 +25,11 @@ function AppComponent(props) {
 
   return (
     <div className="App">
+      <header>
+        <h1 className="App-heading">
+          Rick <span>And</span> Morty
+        </h1>
+      </header>
       <Header
         left={<Icon name={isMobile() ? 'menu' : 'gesture'} color="secondary" size="mini" />}
         //center={<SearchBar isMobile={state.isMobileSize} placeholder="Search" onChange={handleGetSongs} />}

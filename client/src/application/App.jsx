@@ -7,28 +7,25 @@ import Icon from './components/Icon/Icon';
 import { connect } from 'react-redux';
 import { isMobile } from '../utils';
 import { useEffect, useState } from 'react';
+import { userActions } from '../domain/actions/user';
 
-function AppComponent({ songs, dispatch }) {
-  const [state, setState] = useState({ isMobileSize: isMobile() });
-  //const { songsItems = {} } = songs;
-
-  // const favouriteCount = Object.values(songsItems).reduce((favCount, current) => {
-  //   let newCount = favCount;
-  //   if (current.isFavourite) {
-  //     newCount++;
-  //   }
-  //   return newCount;
-  // }, 0);
-
-  const handleResize = () => {
-    const isMobileSize = isMobile();
-    if (state.isMobile !== isMobile) {
-      setState({ isMobileSize });
-    }
-  };
+function AppComponent({ user, dispatch }) {
+  //const [state, setState] = useState({ isMobileSize: isMobile() });
+  const { user: userEntity, userLoading = false } = user;
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    !userEntity && userLoading && dispatch(userActions.getCurrentUser());
+  }, [userEntity]);
+
+  // const handleResize = () => {
+  //   const isMobileSize = isMobile();
+  //   if (state.isMobile !== isMobile) {
+  //     setState({ isMobileSize });
+  //   }
+  // };
+
+  useEffect(() => {
+    // window.addEventListener('resize', handleResize);
   }, []);
 
   const handleGetSongs = (artist) => {

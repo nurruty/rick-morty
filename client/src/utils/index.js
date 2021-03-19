@@ -3,13 +3,7 @@
  *
  * @returns {String} production || development
  */
-const appEnv = () => {
-  const devEnvMap = {
-    localhost: 'localhost',
-  };
-
-  return devEnvMap[window.location.hostname] || 'production';
-};
+const appEnv = () => process.env.NODE_ENV;
 
 /**
  * Checks if the current viewport is a mobile one.

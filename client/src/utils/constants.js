@@ -1,8 +1,8 @@
-const GET_USER_API_PATH = '';
-const LOGIN_USER_PATH = '';
+const GET_USER_API_PATH = 'http://localhost:9000/users';
+const LOGIN_USER_PATH = 'http://localhost:9000/users/login';
 
-const GET_CHARACTERS_API_PATH = '';
-const GET_CHARACTER_API_PATH = '';
+const GET_CHARACTERS_API_PATH = 'http://localhost:9000/users';
+const GET_CHARACTER_API_PATH = 'http://localhost:9000/users';
 const ADD_FAVOURITE_CHARACTER_API_PATH = '';
 const DELETE_FAVOURITE_CHARACTER_API_PATH = '';
 

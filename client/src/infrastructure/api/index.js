@@ -1,47 +1,73 @@
 import axios from 'axios';
 
-const handleSuccess = (response) => response;
-
-const handleError = (error) => {
-  switch (error.response.status) {
-    case 401:
-      this.redirectTo(document, '/');
-      break;
-    case 404:
-      this.redirectTo(document, '/404');
-      break;
-    default:
-      this.redirectTo(document, '/500');
-      break;
-  }
-  return Promise.reject(error);
-};
-
-const redirectTo = (document, path) => {
-  document.location = path;
-};
+const wrappedAxios = Object.assign({}, axios);
+wrappedAxios.defaults.withCredentials = true;
 
 const get = (path) => {
-  return axios.get(path, {
-    responseType: 'json',
+  return new Promise((resolve, reject) => {
+    wrappedAxios(path, {
+      method: 'get',
+      responseType: 'json',
+      withCredentials: true,
+    })
+      .then((response) => {
+        const { data } = response;
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };
 
 const patch = (path, payload) => {
-  return axios.patch(path, payload, {
-    responseType: 'json',
+  return new Promise((resolve, reject) => {
+    wrappedAxios
+      .patch(path, payload, {
+        responseType: 'json',
+        withCredentials: true,
+      })
+      .then((response) => {
+        const { data } = response;
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };
 
 const post = (path, payload) => {
-  return axios.post(path, payload, {
-    responseType: 'json',
+  return new Promise((resolve, reject) => {
+    wrappedAxios
+      .post(path, payload, {
+        responseType: 'json',
+        withCredentials: true,
+      })
+      .then((response) => {
+        const { data } = response;
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };
 
-const remove = (path, payload) => {
-  return axios.delete(path, payload, {
-    responseType: 'json',
+const remove = (path) => {
+  return new Promise((resolve, reject) => {
+    wrappedAxios
+      .delete(path, {
+        responseType: 'json',
+        withCredentials: true,
+      })
+      .then((response) => {
+        const { data } = response;
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };
 

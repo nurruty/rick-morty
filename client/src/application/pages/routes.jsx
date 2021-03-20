@@ -7,7 +7,7 @@ import Error404Page from './error';
 import useUser from '../hooks/useUser';
 
 const Routes = () => {
-  const [, , isLoggedId] = useUser();
+  const { isLoggedIn } = useUser();
 
   return (
     <Router>
@@ -15,8 +15,8 @@ const Routes = () => {
         {/* {!isLoggedId && <Redirect to="/login" />} */}
         <Route path="/character/:characterId" component={Character} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/error404" component={Error404Page} />
-        <Route path="/" component={HomePage} />
+        <Route exact path="/" component={HomePage} />
+        <Route component={Error404Page} />
       </Switch>
     </Router>
   );

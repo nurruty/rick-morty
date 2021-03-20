@@ -2,7 +2,7 @@ import React from 'react';
 import TextRow from '../TextRow/TextRow';
 import './Card.scss';
 
-const Card = ({ imgSrc, info, isMobile }) => {
+const Card = ({ imgSrc, info, actionComponent, isMobile }) => {
   const mobileClass = isMobile ? ' Card_mobile' : '';
   return (
     <div className={'Card' + mobileClass}>
@@ -12,6 +12,7 @@ const Card = ({ imgSrc, info, isMobile }) => {
         </div>
       )}
       {info && <div className="Card-info">{info}</div>}
+      {actionComponent && <div className="Card-action">{actionComponent}</div>}
     </div>
   );
 };

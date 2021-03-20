@@ -10,4 +10,9 @@ const createUser = () => ({
   isLoggedIn: true,
 });
 
-export { createUser };
+const getFavouriteCharacters = (user = {}) => {
+  const { favouriteCharacters = [] } = user;
+  return favouriteCharacters;
+};
+
+export { createUser, getFavouriteCharacters };

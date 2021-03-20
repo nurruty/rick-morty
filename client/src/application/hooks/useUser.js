@@ -7,13 +7,17 @@ import useBindActionCreators from './useBindActionCreators';
 const useUser = () => {
   const { user = {}, userLoading = false, userError } = useSelector(userSelector);
   const userActions = useBindActionCreators(userActionCreators);
-  const { userName, email, isLoggedIn = false } = user;
+  const { isLoggedIn = false } = user;
 
   useEffect(() => {
     !isLoggedIn && !userLoading && userActions.getCurrentUserRequested();
   }, [isLoggedIn]);
 
-  return [userName, email, isLoggedIn];
+  const loginUser = ({ email = '', password = '' }) => {
+    userActions.loginUser({ email, password });
+  };
+
+  return { user, loginUser };
 };
 
 export default useUser;

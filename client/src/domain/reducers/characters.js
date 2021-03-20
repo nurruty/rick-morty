@@ -54,7 +54,7 @@ const charactersReducer = (state = initialState, { type, payload = {} }) => {
       return {
         ...state,
         charactersLoading: false,
-        error,
+        charactersEerror: error,
       };
     }
 

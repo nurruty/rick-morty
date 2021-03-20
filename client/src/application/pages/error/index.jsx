@@ -1,5 +1,11 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
-const Error404Page = () => <div>HOLA Error</div>;
+const Error404Page = () => {
+  return (
+    <div>
+      <img style={{ objectFit: 'cover', width: '100%' }} src="./404.png" alt="" />
+    </div>
+  );
+};
 
 export default Error404Page;

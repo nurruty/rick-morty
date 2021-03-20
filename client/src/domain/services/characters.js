@@ -1,4 +1,4 @@
-import { get, post } from '../../infrastructure/api';
+import { get, post, remove } from '../../infrastructure/api';
 import {
   GET_CHARACTERS_API_PATH,
   GET_CHARACTER_API_PATH,
@@ -14,7 +14,7 @@ const getCharactersService = () =>
       const { data } = response;
       return createCharacters(temp);
     })
-    .catch(createError);
+    .catch((err) => Promise.reject(createError(err.toJSON())));
 
 const getCharacterService = (characterId) =>
   get(`${GET_CHARACTER_API_PATH}?${characterId}`)
@@ -22,19 +22,22 @@ const getCharacterService = (characterId) =>
       const { data } = response;
       return createCharacter(temp[0]);
     })
-    .catch(createError);
+    .catch((err) => Promise.reject(createError(err.toJSON())));
 
-const addFavouriteCharacterService = ({ isFavourite, characterId }) =>
+const addFavouriteCharacterService = ({ characterId }) =>
   post(ADD_FAVOURITE_CHARACTER_API_PATH, {
-    isFavourite,
     characterId,
-  }).catch(createError);
+  })
+    .then((response) => {
+      const { data } = response;
+      return createCharacter(data);
+    })
+    .catch((err) => Promise.reject(createError(err.toJSON())));
 
-const deleteFavouriteCharacterService = ({ isFavourite, characterId }) =>
-  post(DELETE_FAVOURITE_CHARACTER_API_PATH, {
-    isFavourite,
+const deleteFavouriteCharacterService = ({ characterId }) =>
+  remove(DELETE_FAVOURITE_CHARACTER_API_PATH, {
     characterId,
-  }).catch(createError);
+  }).catch((err) => Promise.reject(createError(err.toJSON())));
 
 export {
   getCharacterService,

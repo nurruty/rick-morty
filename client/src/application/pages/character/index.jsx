@@ -1,11 +1,11 @@
 import './Character.scss';
-import React, { useCallback } from 'react';
+import React from 'react';
 import Profile from '../../components/Profile/Profile';
 import TextRow from '../../components/TextRow/TextRow';
-import useCharacter from '../../hooks/useCharacter';
+import useCharacters from '../../hooks/useCharacters';
 
 const Character = () => {
-  const { character = {} } = useCharacter();
+  const { character = {} } = useCharacters();
   const {
     image,
     name = '',

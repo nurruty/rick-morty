@@ -1,6 +1,11 @@
 import { charactersActionTypes } from '../actions/characters';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getCharactersService, getCharacterService } from '../services/characters';
+import {
+  getCharactersService,
+  getCharacterService,
+  addFavouriteCharacterService,
+  deleteFavouriteCharacterService,
+} from '../services/characters';
 
 function* getCharacters() {
   try {
@@ -20,6 +25,26 @@ function* getCharacter() {
   }
 }
 
+function* addFavouriteCharacter({ payload }) {
+  const characterId = payload;
+  try {
+    const character = yield call(addFavouriteCharacterService, { characterId });
+    yield put({ type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_SUCCEDED, payload: { character } });
+  } catch (e) {
+    yield put({ type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_FAILED, payload: { error: e } });
+  }
+}
+
+function* deleteFavouriteCharacter({ payload }) {
+  const characterId = payload;
+  try {
+    const character = yield call(deleteFavouriteCharacterService, { characterId });
+    yield put({ type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_SUCCEDED, payload: { character } });
+  } catch (e) {
+    yield put({ type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_FAILED, payload: { error: e } });
+  }
+}
+
 const watchGetCharacters = function* () {
   yield takeLatest(charactersActionTypes.GET_CHARACTERS_REQUESTED, getCharacters);
 };
@@ -28,4 +53,12 @@ const watchGetCharacter = function* () {
   yield takeLatest(charactersActionTypes.GET_CHARACTER_REQUESTED, getCharacter);
 };
 
-export { watchGetCharacters, watchGetCharacter };
+const watchAddFavouriteCharacter = function* () {
+  yield takeLatest(charactersActionTypes.ADD_FAVOURITE_CHARACTER_REQUESTED, addFavouriteCharacter);
+};
+
+const watchDeleteFavouriteCharacter = function* () {
+  yield takeLatest(charactersActionTypes.DELETE_FAVOURITE_CHARACTER_REQUESTED, deleteFavouriteCharacter);
+};
+
+export { watchGetCharacters, watchGetCharacter, watchAddFavouriteCharacter, watchDeleteFavouriteCharacter };

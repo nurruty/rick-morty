@@ -4,6 +4,7 @@
   display: inline-flex;
   display: -ms-inline-flexbox;
   position: relative;
+  top: 75%;
 
   &-svg {
     width: 51px;
@@ -11,18 +12,6 @@
     position: relative;
     transform: translate(0, 0);
     z-index: 5;
-  }
-
-  &-counter {
-    position: absolute;
-    border-radius: 50%;
-    background-color: $gray-medium;
-    width: 18px;
-    height: 17px;
-    right: 5px;
-    z-index: 10;
-    font-size: 10px;
-    color: $white;
   }
 
   &_nano {

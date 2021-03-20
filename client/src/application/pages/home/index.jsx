@@ -1,25 +1,40 @@
 import './Home.scss';
-import React, { useCallback } from 'react';
+import React from 'react';
 import Card from '../../components/Card/Card';
 import useCharacters from '../../hooks/useCharacters';
 import { useRouter } from '../../hooks/useRouter';
 import TextRow from '../../components/TextRow/TextRow';
+import Icon from '../../components/Icon/Icon';
 
 const HomePage = () => {
-  const [chracters] = useCharacters();
+  // const [chracters] = useCharacters();
+  const { characters, updateFavouriteCharacter } = useCharacters();
   const { push } = useRouter();
 
-  const onClickCard = (characterId) => {
+  const handleClickCharacter = (characterId) => {
     push(`/character/${characterId}`);
+  };
+
+  const handleClickFavIcon = (characterId) => {
+    updateFavouriteCharacter && updateFavouriteCharacter(characterId);
   };
 
   return (
     <div className="Home">
       <div className="Home-grid">
-        {chracters.map((character) => {
-          const { image, name = '', status = '', species = '', location = '', origin = '' } = character;
+        {characters.map((character) => {
+          const {
+            id,
+            image,
+            name = '',
+            status = '',
+            species = '',
+            location = '',
+            origin = '',
+            isFavourite = false,
+          } = character;
           return (
-            <div key={character.id} className="Home-grid-item" onClick={() => onClickCard(character.id)}>
+            <div key={id} className="Home-grid-item" onClick={() => handleClickCharacter(id)}>
               <Card
                 imgSrc={image}
                 info={
@@ -28,6 +43,17 @@ const HomePage = () => {
                     <TextRow title={'Last known location'} subtitle={location} />
                     <TextRow title={'First seen in'} subtitle={origin} />
                   </>
+                }
+                actionComponent={
+                  <Icon
+                    name="heart"
+                    size="nano"
+                    color={isFavourite ? 'red' : 'white'}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleClickFavIcon(id);
+                    }}
+                  />
                 }
               />
             </div>

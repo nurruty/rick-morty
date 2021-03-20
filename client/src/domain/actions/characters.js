@@ -8,10 +8,10 @@ const charactersActionTypes = {
   GET_CHARACTER_FAILED: 'GET_CHARACTER_FAILED',
 
   ADD_FAVOURITE_CHARACTER_REQUESTED: 'ADD_FAVOURITE_CHARACTER_REQUESTED',
-  ADD_FAVOURITE_CHARACTER_SUCCEDED: 'ADD_FAVOURITE_CHARACTER_SUCCEDED:',
+  ADD_FAVOURITE_CHARACTER_SUCCEDED: 'ADD_FAVOURITE_CHARACTER_SUCCEDED',
   ADD_FAVOURITE_CHARACTER_FAILED: 'ADD_FAVOURITE_CHARACTER_FAILED',
 
-  DELETE_FAVOURITE_CHARACTER_REQUESTED: 'ADD_FAVOURITE_CHARACTER_REQUESTED',
+  DELETE_FAVOURITE_CHARACTER_REQUESTED: 'DELETE_FAVOURITE_CHARACTER_REQUESTED',
   DELETE_FAVOURITE_CHARACTER_SUCCEDED: ' DELETE_FAVOURITE_CHARACTER_SUCCEDED:',
   DELETE_FAVOURITE_CHARACTER_FAILED: 'DELETE_FAVOURITE_CHARACTER_FAILED',
 };
@@ -41,8 +41,9 @@ const charactersActionsCreators = {
     payload: error,
   }),
 
-  addFavouriteCharacterRequested: () => ({
+  addFavouriteCharacterRequested: (characterId) => ({
     type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_REQUESTED,
+    payload: characterId,
   }),
   addFavouriteCharacterSucceded: (data) => ({
     type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_SUCCEDED,
@@ -53,8 +54,9 @@ const charactersActionsCreators = {
     payload: error,
   }),
 
-  deleteFavouriteCharacterRequested: () => ({
+  deleteFavouriteCharacterRequested: (characterId) => ({
     type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_REQUESTED,
+    payload: characterId,
   }),
   deleteFavouriteCharacterSucceded: (data) => ({
     type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_SUCCEDED,

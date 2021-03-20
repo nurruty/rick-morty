@@ -22,21 +22,27 @@ const redirectTo = (document, path) => {
 };
 
 const get = (path) => {
-  return axios.get(path);
+  return axios.get(path, {
+    responseType: 'json',
+  });
 };
 
 const patch = (path, payload) => {
   return axios.patch(path, payload, {
     responseType: 'json',
-    data: payload,
   });
 };
 
 const post = (path, payload) => {
   return axios.post(path, payload, {
     responseType: 'json',
-    data: payload,
   });
 };
 
-export { get, patch, post };
+const remove = (path, payload) => {
+  return axios.delete(path, payload, {
+    responseType: 'json',
+  });
+};
+
+export { get, patch, post, remove };

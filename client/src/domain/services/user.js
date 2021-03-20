@@ -3,7 +3,10 @@ import { GET_USER_API_PATH, LOGIN_USER_PATH } from '../../utils/constants';
 import { createUser } from '../entities/user';
 import { createError } from '../entities/error';
 
-const getCurrentUserService = () => get(GET_USER_API_PATH).then(createUser).catch(createError);
+const getCurrentUserService = () =>
+  get(GET_USER_API_PATH)
+    .then(createUser)
+    .catch((err) => Promise.reject(createError(err.toJSON())));
 
 const loginUserService = ({ email, password }) =>
   post(LOGIN_USER_PATH, {
@@ -11,6 +14,6 @@ const loginUserService = ({ email, password }) =>
     password,
   })
     .then(createUser)
-    .catch(createError);
+    .catch((err) => Promise.reject(createError(err.toJSON())));
 
 export { getCurrentUserService, loginUserService };

@@ -22,6 +22,9 @@ const HomePage = () => {
   return (
     <div className="Home">
       <div className="Home-grid">
+        <button color="white" onClick={() => push('/login')}>
+          TOCARME
+        </button>
         {characters.map((character) => {
           const {
             id,

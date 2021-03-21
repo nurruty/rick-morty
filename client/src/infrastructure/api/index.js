@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const wrappedAxios = Object.assign({}, axios);
-wrappedAxios.defaults.withCredentials = true;
+const wrappedAxios = axios.create({
+  withCredentials: true,
+});
 
 const get = (path) => {
   return new Promise((resolve, reject) => {
     wrappedAxios(path, {
       method: 'get',
       responseType: 'json',
-      withCredentials: true,
     })
       .then((response) => {
         const { data } = response;
@@ -22,11 +22,11 @@ const get = (path) => {
 
 const patch = (path, payload) => {
   return new Promise((resolve, reject) => {
-    wrappedAxios
-      .patch(path, payload, {
-        responseType: 'json',
-        withCredentials: true,
-      })
+    wrappedAxios(path, {
+      method: 'patch',
+      responseType: 'json',
+      data: payload,
+    })
       .then((response) => {
         const { data } = response;
         resolve(data);
@@ -39,11 +39,11 @@ const patch = (path, payload) => {
 
 const post = (path, payload) => {
   return new Promise((resolve, reject) => {
-    wrappedAxios
-      .post(path, payload, {
-        responseType: 'json',
-        withCredentials: true,
-      })
+    wrappedAxios(path, {
+      method: 'post',
+      responseType: 'json',
+      data: payload,
+    })
       .then((response) => {
         const { data } = response;
         resolve(data);

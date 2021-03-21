@@ -1,5 +1,5 @@
 import './Login.scss';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import useUser from '../../hooks/useUser';
 import { useRouter } from '../../hooks/useRouter';
@@ -13,7 +13,7 @@ const LoginPage = () => {
       password: '',
     },
     onSubmit: (values) => {
-      loginUser(JSON.stringify(values, null, 2));
+      loginUser(values);
       push('/');
     },
   });

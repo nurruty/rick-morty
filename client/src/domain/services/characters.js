@@ -14,7 +14,10 @@ const getCharactersService = () =>
       const { data } = response;
       return createCharacters(temp);
     })
-    .catch((err) => Promise.reject(createError(err.toJSON())));
+    .catch((err) => {
+      console.log(err);
+      Promise.reject(createError(err.toJSON()));
+    });
 
 const getCharacterService = (characterId) =>
   get(`${GET_CHARACTER_API_PATH}?${characterId}`)

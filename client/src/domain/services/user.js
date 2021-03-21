@@ -5,7 +5,10 @@ import { createError } from '../entities/error';
 
 const getCurrentUserService = () =>
   get(GET_USER_API_PATH)
-    .then(createUser)
+    .then((response) => {
+      const { data } = response;
+      return createUser(data);
+    })
     .catch((err) => Promise.reject(createError(err.toJSON())));
 
 const loginUserService = ({ email, password }) =>
@@ -13,7 +16,10 @@ const loginUserService = ({ email, password }) =>
     email,
     password,
   })
-    .then(createUser)
+    .then((response) => {
+      const { data } = response;
+      return createUser(data);
+    })
     .catch((err) => Promise.reject(createError(err.toJSON())));
 
 export { getCurrentUserService, loginUserService };

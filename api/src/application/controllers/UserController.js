@@ -1,42 +1,50 @@
-const getUser = async (userId, { repository }) => {
-  return {
-    email: 'nicourruty',
-  };
-  // try {
-  //   const user = await repository.get(userId);
-  //   return user;
-  // } catch (e) {
-  //   return { code: '1', message: 'Not found' };
-  // }
-};
+const LoginUserUC = require('../use_cases/user/LoginUser');
+const GetCurrentUserUC = require('../use_cases/user/GetCurrentUser');
+const AddFavouriteCharacterUC = require('../use_cases/user/AddFavouriteCharacter');
+const RemoveFavouriteCharacterUC = require('../use_cases/user/RemoveFavouriteCharacter');
 
-const loginUser = async (data) => {
-  const user = {
-    email: 'nico',
-    id: 1,
-  };
+const UserRepository = require('../../infrastructure/db/mongoose/repositories/UserRepository');
+const UserService = require('../../domain/services/UserService');
+const EncryptionService = require('../../domain/services/EncryptionService');
+
+const getUser = async ({ email }) => {
+  const userRepository = new UserRepository();
+
+  const user = await GetCurrentUserUC({ email, userRepository });
 
   return user;
 };
 
-const addFavouriteCharacterUser = async (data) => {
-  const character = {
-    email: 'nico',
-    id: 1,
-    characters: [1],
-  };
+const loginUser = async ({ email, password }) => {
+  const userRepository = new UserRepository();
+
+  const user = await LoginUserUC(email, password, {
+    userRepository,
+    userService: UserService,
+    encryptionService: EncryptionService,
+  });
 
   return user;
 };
 
-const deleteFavouriteCharacterUser = async (data) => {
-  const user = {
-    email: 'nico',
-    id: 1,
-    characters: [],
-  };
+const addFavouriteCharacterUser = async ({ email, characterId }) => {
+  const userRepository = new UserRepository();
 
-  return user;
+  await AddFavouriteCharacterUC({
+    email,
+    characterId,
+    userRepository,
+  });
+};
+
+const deleteFavouriteCharacterUser = async ({ email, characterId }) => {
+  const userRepository = new UserRepository();
+
+  await RemoveFavouriteCharacterUC({
+    email,
+    characterId,
+    userRepository,
+  });
 };
 
 module.exports = {

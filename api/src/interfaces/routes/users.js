@@ -8,7 +8,7 @@ router.get('/', verifyToken, function (req, res, next) {
   const { getUser } = UserController;
   const { uData } = req;
 
-  getUser(uData.id, {})
+  getUser({ email: uData.email })
     .then((user) => {
       res.send(user);
     })
@@ -30,11 +30,12 @@ router.post('/login', function (req, res, next) {
     });
 });
 
-router.post('/character', function (req, res, next) {
+router.post('/character', verifyToken, function (req, res, next) {
   const { addFavouriteCharacterUser } = UserController;
   const { body } = req;
+  const { uData } = req;
 
-  addFavouriteCharacterUser(body)
+  addFavouriteCharacterUser({ ...uData, ...body })
     .then((user) => {
       res.send(user);
     })
@@ -43,11 +44,12 @@ router.post('/character', function (req, res, next) {
     });
 });
 
-router.delete('/character', function (req, res, next) {
+router.delete('/character/:id', verifyToken, function (req, res, next) {
   const { deleteFavouriteCharacterUser } = UserController;
-  const { body } = req;
+  const { uData, params } = req;
+  const { id } = params;
 
-  deleteFavouriteCharacterUser(body)
+  deleteFavouriteCharacterUser({ ...uData, characterId: id })
     .then((user) => {
       res.send(user);
     })

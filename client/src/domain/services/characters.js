@@ -16,7 +16,7 @@ const addFavouriteCharacterService = ({ characterId }) =>
   });
 
 const deleteFavouriteCharacterService = ({ characterId }) =>
-  remove(DELETE_FAVOURITE_CHARACTER_API_PATH, {
+  remove(`${DELETE_FAVOURITE_CHARACTER_API_PATH}/${characterId}`, {
     characterId,
   });
 

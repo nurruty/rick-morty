@@ -1,7 +1,7 @@
 'use strict';
 
-const User = require('../../../../interfaces/mappers/User');
-const UserSchema = require('../db/mongoose/schemas/User');
+const { toEntity, toDatabase } = require('../../../../interfaces/mappers/UserMapper');
+const UserModel = require('../schemas/User');
 const UserRepository = require('../../../../interfaces/repositories/IUserRepository');
 
 module.exports = class extends UserRepository {
@@ -11,18 +11,24 @@ module.exports = class extends UserRepository {
 
   async persist(userEntity) {
     const { email, password } = userEntity;
-    const mongooseUser = new UserSchema({ email, password });
+    const mongooseUser = new UserModel({ email, password });
     await mongooseUser.save();
-    return new User(mongooseUser.id, mongooseUser.email, mongooseUser.password);
+    return toEntity(mongooseUser);
+  }
+
+  async merge(userEntity) {
+    const { id } = userEntity;
+    const mongooseUser = await UserModel.findByIdAndUpdate(id, toDatabase(userEntity));
+    return toEntity(mongooseUser);
   }
 
   async get(userId) {
-    const mongooseUser = await UserSchema.findById(userId);
-    return new User(mongooseUser.id, mongooseUser.email, mongooseUser.password);
+    const mongooseUser = await UserModel.findById(userId);
+    return toEntity(mongooseUser);
   }
 
   async getByEmail(userEmail) {
-    const mongooseUser = await UserSchema.find({ email: userEmail });
-    return new User(mongooseUser.id, mongooseUser.email, mongooseUser.password);
+    const mongooseUser = await UserModel.find({ email: userEmail });
+    return toEntity(mongooseUser[0]);
   }
 };

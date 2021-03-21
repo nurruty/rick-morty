@@ -3,18 +3,19 @@ import { useSelector } from 'react-redux';
 import { userActionCreators } from '../../domain/actions/user';
 import userSelector from '../../domain/selectors/user';
 import useBindActionCreators from './useBindActionCreators';
+import { useRouter } from './useRouter';
 
 const useUser = () => {
-  const { user = {}, userLoading = false, userError } = useSelector(userSelector);
+  const { user, userLoading = false, userError } = useSelector(userSelector);
   const userActions = useBindActionCreators(userActionCreators);
-  const { isLoggedIn = false } = user;
+  const { push } = useRouter();
 
   useEffect(() => {
-    !isLoggedIn && !userLoading && userActions.getCurrentUserRequested();
-  }, [isLoggedIn]);
+    !user && !userLoading && userActions.getCurrentUserRequested();
+  }, [user, userLoading, userActions]);
 
   const loginUser = ({ email = '', password = '' }) => {
-    userActions.loginUser({ email, password });
+    userActions.loginUser({ email, password, push });
   };
 
   return { user, loginUser };

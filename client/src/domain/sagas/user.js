@@ -15,10 +15,11 @@ function* getCurrentUser() {
 }
 
 function* loginUser({ payload }) {
-  const { email, password } = payload;
+  const { email, password, push } = payload;
   try {
     const user = yield call(loginUserService, { email, password });
     yield put({ type: userActionTypes.LOGIN_USER_SUCCEDED, payload: { user: createUser(user) } });
+    push('/');
   } catch (e) {
     yield put({ type: userActionTypes.LOGIN_USER_FAILED, payload: { error: createError(e) } });
   }

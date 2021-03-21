@@ -1,12 +1,19 @@
 import './App.scss';
-import Routes from './pages/routes';
 import { connect } from 'react-redux';
 import { isMobile } from '../utils';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import LoginPage from './pages/login';
+import ProtectedRoute from './components/Routes/ProtectedRoute';
+import GuestRoute from './components/Routes/GuestRoute';
+import HomePage from './pages/home';
+import Error404Page from './pages/error';
+import Character from './pages/character';
 import useUser from './hooks/useUser';
 
 function AppComponent(props) {
   //const [state, setState] = useState({ isMobileSize: isMobile() });
-  //const { isLoggedIn } = useUser();
+  const { user } = useUser();
+  const { isLoggedIn = false } = user || {};
 
   // const handleResize = () => {
   //   const isMobileSize = isMobile();
@@ -22,7 +29,21 @@ function AppComponent(props) {
           Rick <span>And</span> Morty
         </h1>
       </header>
-      <Routes />
+      {user && (
+        <Router>
+          <Switch>
+            <GuestRoute isLoggedIn={isLoggedIn} exact path="/login" component={LoginPage} />
+            <ProtectedRoute
+              exact
+              path="/character/:characterId"
+              isLoggedIn={isLoggedIn}
+              component={Character}
+            />
+            <ProtectedRoute exact path="/" component={HomePage} isLoggedIn={isLoggedIn} />
+            <Route component={Error404Page} />
+          </Switch>
+        </Router>
+      )}
     </div>
   );
 }

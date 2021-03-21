@@ -6,16 +6,14 @@ const CharactersController = require('../../application/controllers/CharacterCon
 
 router.get('/', verifyToken, function (req, res, next) {
   const { getCharacters } = CharactersController;
+  const { query } = req;
 
-  console.log('HOLAAA');
-
-  const { query, params } = req;
   getCharacters()
     .then((characters) => {
       res.send(characters);
     })
     .catch((error) => {
-      res.error(error);
+      res.status(500).send('Error');
     });
 });
 
@@ -23,14 +21,12 @@ router.get('/:id', verifyToken, function (req, res, next) {
   const { getCharacter } = CharactersController;
   const { query, params } = req;
 
-  console.log('HOLAAA4');
-
   getCharacter(params)
     .then((character) => {
       res.send(character);
     })
     .catch((error) => {
-      res.error(error);
+      res.status(500).send('Error');
     });
 });
 

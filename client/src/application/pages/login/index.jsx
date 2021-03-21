@@ -14,7 +14,7 @@ const LoginPage = () => {
     },
     onSubmit: (values) => {
       loginUser(values);
-      push('/');
+      //push('/');
     },
   });
   return (

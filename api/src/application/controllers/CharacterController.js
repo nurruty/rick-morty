@@ -173,7 +173,7 @@ const getCharacter = async (params) => {
   const { id } = params;
 
   return {
-    id: 3,
+    id: id,
     name: 'Summer Smith',
     status: 'Alive',
     species: 'Human',

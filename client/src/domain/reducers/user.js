@@ -2,11 +2,7 @@ import { userActionTypes } from '../actions/user';
 
 const initialState = {
   userLoading: false,
-  user: {
-    userName: undefined,
-    email: undefined,
-    isLoggedIn: false,
-  },
+  user: undefined,
   userEerror: null,
 };
 
@@ -35,6 +31,11 @@ const userReducer = (state = initialState, { type, payload = {} }) => {
       return {
         ...state,
         userLoading: false,
+        user: {
+          userName: undefined,
+          email: undefined,
+          isLoggedIn: false,
+        },
         error,
       };
 

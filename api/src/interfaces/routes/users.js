@@ -13,7 +13,7 @@ router.get('/', verifyToken, function (req, res, next) {
       res.send(user);
     })
     .catch((error) => {
-      res.error(error);
+      res.status(500).send('Error');
     });
 });
 
@@ -26,7 +26,7 @@ router.post('/login', function (req, res, next) {
       generateToken(res, user).send(user);
     })
     .catch((error) => {
-      res.error(error);
+      res.status(500).send('Error');
     });
 });
 
@@ -39,7 +39,7 @@ router.post('/character', function (req, res, next) {
       res.send(user);
     })
     .catch((error) => {
-      res.error(error);
+      res.status(500).send('Error');
     });
 });
 
@@ -52,7 +52,7 @@ router.delete('/character', function (req, res, next) {
       res.send(user);
     })
     .catch((error) => {
-      res.error(error);
+      res.status(500).send('Error');
     });
 });
 

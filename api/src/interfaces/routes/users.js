@@ -18,9 +18,9 @@ router.get('/', verifyToken, function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
   const { loginUser } = UserController;
-  const { payload } = req;
+  const { body } = req;
 
-  loginUser(payload)
+  loginUser(body)
     .then((user) => {
       generateToken(res, user).send(user);
     })

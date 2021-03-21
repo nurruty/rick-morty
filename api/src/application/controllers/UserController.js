@@ -7,7 +7,7 @@ const getUser = async () => {
   return user;
 };
 
-const loginUser = async () => {
+const loginUser = async (data) => {
   const user = {
     email: 'nico',
     id: 1,

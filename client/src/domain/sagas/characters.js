@@ -6,42 +6,63 @@ import {
   addFavouriteCharacterService,
   deleteFavouriteCharacterService,
 } from '../services/characters';
+import { createError } from '../entities/error';
+import { createCharacters, createCharacter, setFavouriteCharacter } from '../entities/character';
 
 function* getCharacters() {
   try {
     const characters = yield call(getCharactersService);
-    yield put({ type: charactersActionTypes.GET_CHARACTERS_SUCCEDED, payload: { characters } });
+    yield put({
+      type: charactersActionTypes.GET_CHARACTERS_SUCCEDED,
+      payload: { characters: createCharacters(characters) },
+    });
   } catch (e) {
-    yield put({ type: charactersActionTypes.GET_CHARACTERS_FAILED, payload: { error: e } });
+    yield put({ type: charactersActionTypes.GET_CHARACTERS_FAILED, payload: { error: createError(e) } });
   }
 }
 
-function* getCharacter() {
+function* getCharacter({ payload }) {
+  const characterId = payload;
   try {
-    const character = yield call(getCharacterService);
-    yield put({ type: charactersActionTypes.GET_CHARACTER_SUCCEDED, payload: { character } });
+    const character = yield call(getCharacterService, { characterId });
+    yield put({
+      type: charactersActionTypes.GET_CHARACTER_SUCCEDED,
+      payload: { character: createCharacter(character) },
+    });
   } catch (e) {
-    yield put({ type: charactersActionTypes.GET_CHARACTER_FAILED, payload: { error: e } });
+    yield put({ type: charactersActionTypes.GET_CHARACTER_FAILED, payload: { error: createError(e) } });
   }
 }
 
 function* addFavouriteCharacter({ payload }) {
-  const characterId = payload;
+  const character = payload;
   try {
-    const character = yield call(addFavouriteCharacterService, { characterId });
-    yield put({ type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_SUCCEDED, payload: { character } });
+    yield call(addFavouriteCharacterService, { characterId: character.id });
+    yield put({
+      type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_SUCCEDED,
+      payload: { character: setFavouriteCharacter(character, true) },
+    });
   } catch (e) {
-    yield put({ type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_FAILED, payload: { error: e } });
+    yield put({
+      type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_FAILED,
+      payload: { error: createError(e) },
+    });
   }
 }
 
 function* deleteFavouriteCharacter({ payload }) {
-  const characterId = payload;
+  const character = payload;
   try {
-    const character = yield call(deleteFavouriteCharacterService, { characterId });
-    yield put({ type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_SUCCEDED, payload: { character } });
+    yield call(deleteFavouriteCharacterService, { characterId: character.id });
+    yield put({
+      type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_SUCCEDED,
+      payload: { character: setFavouriteCharacter(character, false) },
+    });
   } catch (e) {
-    yield put({ type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_FAILED, payload: { error: e } });
+    yield put({
+      type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_FAILED,
+      payload: { error: createError(e) },
+    });
   }
 }
 

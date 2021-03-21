@@ -1,17 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
 
-var indexRouter = require('../../interfaces/routes/index');
-var usersRouter = require('../../interfaces/routes/users');
+const indexRouter = require('../../interfaces/routes/index');
+const usersRouter = require('../../interfaces/routes/users');
+const charactersRouter = require('../../interfaces/routes/characters');
 
-var app = express();
+const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../../../views'));
 app.set('view engine', 'jade');
 
 app.use(
@@ -27,6 +28,7 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/characters', charactersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

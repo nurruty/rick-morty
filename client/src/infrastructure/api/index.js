@@ -2,20 +2,19 @@ import axios from 'axios';
 
 const wrappedAxios = axios.create({
   withCredentials: true,
+  responseType: 'json',
 });
 
-const get = (path) => {
+const get = (path, params) => {
   return new Promise((resolve, reject) => {
-    wrappedAxios(path, {
-      method: 'get',
-      responseType: 'json',
-    })
+    return wrappedAxios
+      .get(path, { ...params })
       .then((response) => {
         const { data } = response;
         resolve(data);
       })
       .catch((error) => {
-        reject(error);
+        reject(error.toJSON());
       });
   });
 };
@@ -32,7 +31,7 @@ const patch = (path, payload) => {
         resolve(data);
       })
       .catch((error) => {
-        reject(error);
+        reject(error.toJSON());
       });
   });
 };
@@ -49,7 +48,7 @@ const post = (path, payload) => {
         resolve(data);
       })
       .catch((error) => {
-        reject(error);
+        reject(error.toJSON());
       });
   });
 };
@@ -66,7 +65,7 @@ const remove = (path) => {
         resolve(data);
       })
       .catch((error) => {
-        reject(error);
+        reject(error.toJSON());
       });
   });
 };

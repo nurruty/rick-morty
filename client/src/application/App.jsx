@@ -6,7 +6,7 @@ import useUser from './hooks/useUser';
 
 function AppComponent(props) {
   //const [state, setState] = useState({ isMobileSize: isMobile() });
-  const { isLoggedIn } = useUser();
+  //const { isLoggedIn } = useUser();
 
   // const handleResize = () => {
   //   const isMobileSize = isMobile();

@@ -15,4 +15,8 @@ const createCharacters = (characters = []) =>
     return [...chrs, createCharacter(ch)];
   }, []);
 
-export { createCharacter, createCharacters };
+const setFavouriteCharacter = (character, isFavourite) => {
+  return { ...character, isFavourite };
+};
+
+export { createCharacter, createCharacters, setFavouriteCharacter };

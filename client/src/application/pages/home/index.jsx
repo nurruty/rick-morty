@@ -7,7 +7,6 @@ import TextRow from '../../components/TextRow/TextRow';
 import Icon from '../../components/Icon/Icon';
 
 const HomePage = () => {
-  // const [chracters] = useCharacters();
   const { characters, updateFavouriteCharacter } = useCharacters();
   const { push } = useRouter();
 
@@ -15,16 +14,13 @@ const HomePage = () => {
     push(`/character/${characterId}`);
   };
 
-  const handleClickFavIcon = (characterId) => {
-    updateFavouriteCharacter && updateFavouriteCharacter(characterId);
+  const handleClickFavIcon = (character) => {
+    updateFavouriteCharacter && updateFavouriteCharacter(character);
   };
 
   return (
     <div className="Home">
       <div className="Home-grid">
-        <button color="white" onClick={() => push('/login')}>
-          TOCARME
-        </button>
         {characters.map((character) => {
           const {
             id,
@@ -54,7 +50,7 @@ const HomePage = () => {
                     color={isFavourite ? 'red' : 'white'}
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleClickFavIcon(id);
+                      handleClickFavIcon(character);
                     }}
                   />
                 }

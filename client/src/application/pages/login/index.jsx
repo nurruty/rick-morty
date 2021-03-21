@@ -36,7 +36,7 @@ const LoginPage = () => {
             type="password"
             placeholder="Password"
             onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.password}
           />
           <button type="submit">Log In</button>
         </div>

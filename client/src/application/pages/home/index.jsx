@@ -5,11 +5,13 @@ import useCharacters from '../../hooks/useCharacters';
 import { useRouter } from '../../hooks/useRouter';
 import TextRow from '../../components/TextRow/TextRow';
 import Icon from '../../components/Icon/Icon';
+import usePagination from '../../hooks/usePagination';
 
 const HomePage = () => {
   const { characters, updateFavouriteCharacter } = useCharacters();
-  console.log('🚀 ~ file: index.jsx ~ line 11 ~ HomePage ~ characters', characters);
-  const { push } = useRouter();
+  const { goToPage } = usePagination();
+  const { push, query } = useRouter();
+  const { page = '1' } = query;
 
   const handleClickCharacter = (characterId) => {
     push(`/character/${characterId}`);
@@ -17,6 +19,11 @@ const HomePage = () => {
 
   const handleClickFavIcon = (character) => {
     updateFavouriteCharacter && updateFavouriteCharacter(character);
+  };
+
+  const handleClickPage = () => {
+    const nextPage = parseInt(page) + 1;
+    goToPage(nextPage, 'characters');
   };
 
   return (
@@ -60,7 +67,7 @@ const HomePage = () => {
           );
         })}
       </div>
-      <button onClick={() => push('?page=2')}>NEXT</button>
+      <button onClick={() => handleClickPage()}>NEXT</button>
     </div>
   );
 };

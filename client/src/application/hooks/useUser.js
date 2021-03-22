@@ -11,14 +11,14 @@ const useUser = () => {
   const { push } = useRouter();
 
   useEffect(() => {
-    !user && !userLoading && userActions.getCurrentUserRequested();
-  }, [user, userLoading, userActions]);
+    !user && userActions.getCurrentUserRequested();
+  }, [user, userActions]);
 
   const loginUser = ({ email = '', password = '' }) => {
     userActions.loginUser({ email, password, push });
   };
 
-  return { user, loginUser };
+  return { user, userLoading, userError, loginUser };
 };
 
 export default useUser;

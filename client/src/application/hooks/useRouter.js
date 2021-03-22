@@ -12,6 +12,11 @@ export function useRouter() {
   const history = useHistory();
   const match = useRouteMatch();
 
+  //custom
+  const nextPage = (page) => {
+    history.push(`?page=${page}`);
+  };
+
   // Return our custom router object
   // Memoize so that a new object is only returned if something changes
   return useMemo(() => {
@@ -20,6 +25,9 @@ export function useRouter() {
       push: history.push,
       replace: history.replace,
       pathname: location.pathname,
+
+      // custom
+      nextPage,
       // Merge params and parsed query string into single "query" object
       // so that they can be used interchangeably.
       // Example: /:topic?sort=popular -> { topic: "react", sort: "popular" }

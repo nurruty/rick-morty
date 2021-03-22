@@ -1,4 +1,4 @@
-const createCharacter = ({ id, name, status, species, gender, origin, location, image, episodes } = {}) => ({
+const createCharacter = ({
   id,
   name,
   status,
@@ -7,7 +7,21 @@ const createCharacter = ({ id, name, status, species, gender, origin, location, 
   origin,
   location,
   image,
+  type,
   episodes,
+  isFavourite,
+} = {}) => ({
+  id,
+  name,
+  status,
+  species,
+  gender,
+  type,
+  origin,
+  location,
+  image,
+  episodes,
+  isFavourite,
 });
 
 const createCharacters = (characters = []) =>

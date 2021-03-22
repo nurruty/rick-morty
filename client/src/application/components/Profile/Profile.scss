@@ -6,6 +6,8 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: $gray-dark;
+  width: 50%;
+  margin: auto;
 
   &-main {
     display: flex;
@@ -25,10 +27,7 @@
     }
   }
 
-  &-extra {
-    flex-grow: 1;
-    border: 1px solid white;
-    border-radius: 1%;
-    padding: 21px;
+  &-action {
+    cursor: pointer;
   }
 }

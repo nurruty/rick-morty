@@ -8,6 +8,7 @@ import Icon from '../../components/Icon/Icon';
 
 const HomePage = () => {
   const { characters, updateFavouriteCharacter } = useCharacters();
+  console.log('🚀 ~ file: index.jsx ~ line 11 ~ HomePage ~ characters', characters);
   const { push } = useRouter();
 
   const handleClickCharacter = (characterId) => {
@@ -59,6 +60,7 @@ const HomePage = () => {
           );
         })}
       </div>
+      <button onClick={() => push('?page=2')}>NEXT</button>
     </div>
   );
 };

@@ -28,8 +28,15 @@ const removeFavouriteCharacter = (user, characterId) => {
   return { ...nUser, favouriteCharacters };
 };
 
+const hasFavouriteCharacter = (user, characterId) => {
+  const { favouriteCharacters = [] } = user;
+
+  return favouriteCharacters.indexOf(characterId) > -1;
+};
+
 module.exports = {
   createUser,
   setFavouriteCharacter,
   removeFavouriteCharacter,
+  hasFavouriteCharacter,
 };

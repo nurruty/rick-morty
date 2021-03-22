@@ -12,7 +12,7 @@ module.exports = class extends CharacterRepository {
 
   async get(page) {
     try {
-      const response = await axios.get(CHARACTERS_API_PATH);
+      const response = await axios.get(CHARACTERS_API_PATH, { params: { page } });
       const {
         data: { results = [] },
       } = response;

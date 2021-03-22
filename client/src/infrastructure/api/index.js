@@ -8,7 +8,7 @@ const wrappedAxios = axios.create({
 const get = (path, params) => {
   return new Promise((resolve, reject) => {
     return wrappedAxios
-      .get(path, { ...params })
+      .get(path, { params })
       .then((response) => {
         const { data } = response;
         resolve(data);

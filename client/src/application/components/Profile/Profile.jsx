@@ -1,6 +1,6 @@
 import './Profile.scss';
 
-const Profile = ({ imgSrc, profileInfo, extraInfo }) => {
+const Profile = ({ imgSrc, profileInfo, actionComponent }) => {
   return (
     <div className="Profile">
       <div className="Profile-main">
@@ -8,7 +8,7 @@ const Profile = ({ imgSrc, profileInfo, extraInfo }) => {
           <img src={imgSrc} alt="" />
         </div>
         <div className="Profile-info">{profileInfo}</div>
-        <div className="Profile-extra">{extraInfo}</div>
+        <div className="Profile-action">{actionComponent}</div>
       </div>
     </div>
   );

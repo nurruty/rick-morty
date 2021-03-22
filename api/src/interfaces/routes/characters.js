@@ -6,9 +6,10 @@ const CharactersController = require('../../application/controllers/CharacterCon
 
 router.get('/', verifyToken, function (req, res, next) {
   const { getCharacters } = CharactersController;
-  const { query } = req;
+  const { query, uData } = req;
+  const { page } = query;
 
-  getCharacters()
+  getCharacters({ userEmail: uData.email, page })
     .then((characters) => {
       res.send(characters);
     })
@@ -19,9 +20,9 @@ router.get('/', verifyToken, function (req, res, next) {
 
 router.get('/:id', verifyToken, function (req, res, next) {
   const { getCharacter } = CharactersController;
-  const { query, params } = req;
+  const { query, params, uData } = req;
 
-  getCharacter(params)
+  getCharacter({ userEmail: uData.email, ...params })
     .then((character) => {
       res.send(character);
     })

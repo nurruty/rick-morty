@@ -3,9 +3,10 @@ import React from 'react';
 import Profile from '../../components/Profile/Profile';
 import TextRow from '../../components/TextRow/TextRow';
 import useCharacters from '../../hooks/useCharacters';
+import Icon from '../../components/Icon/Icon';
 
 const Character = () => {
-  const { character = {} } = useCharacters();
+  const { character = {}, updateFavouriteCharacter } = useCharacters();
   const {
     image,
     name = '',
@@ -13,8 +14,15 @@ const Character = () => {
     species = '',
     location = '',
     origin = '',
-    episodes = [],
+    gender = '',
+    type = '',
+    episodes = 0,
+    isFavourite = false,
   } = character;
+
+  const handleClickFavIcon = (character) => {
+    updateFavouriteCharacter && updateFavouriteCharacter(character);
+  };
 
   return (
     <div className="Character">
@@ -25,22 +33,20 @@ const Character = () => {
             <TextRow key="p1" title={name} subtitle={status + '-' + species} type="big" />
             <TextRow key="p2" title={'Last known location'} subtitle={location} type="big" />
             <TextRow key="p3" title={'First seen in'} subtitle={origin} type="big" />
+            <TextRow key="p4" title={'Gender'} subtitle={gender} type="big" />
+            <TextRow key="p5" title={'Type'} subtitle={type} type="big" />
+            <TextRow key="p6" title={'Episodes'} subtitle={episodes} type="big" />
           </>
         }
-        extraInfo={
-          <>
-            <TextRow title={'Episodes'} type="big" />
-            <ul>
-              {episodes.map((value, indx) => {
-                const { name, episode, air_date } = value;
-                return (
-                  <li key={indx}>
-                    <TextRow key="p1" title={name + '-' + episode} subtitle={air_date} type="medium" />
-                  </li>
-                );
-              })}
-            </ul>
-          </>
+        actionComponent={
+          <Icon
+            name="heart"
+            color={isFavourite ? 'red' : 'white'}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClickFavIcon(character);
+            }}
+          />
         }
       />
     </div>

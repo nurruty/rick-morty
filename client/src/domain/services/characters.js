@@ -6,7 +6,7 @@ import {
   DELETE_FAVOURITE_CHARACTER_API_PATH,
 } from '../../utils/constants';
 
-const getCharactersService = () => get(GET_CHARACTERS_API_PATH);
+const getCharactersService = ({ page }) => get(GET_CHARACTERS_API_PATH, { page });
 
 const getCharacterService = ({ characterId }) => get(`${GET_CHARACTER_API_PATH}/${characterId}`);
 

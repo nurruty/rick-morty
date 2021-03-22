@@ -8,14 +8,17 @@ import {
 } from '../services/characters';
 import { createError } from '../entities/error';
 import { createCharacters, createCharacter, setFavouriteCharacter } from '../entities/character';
+import { paginationActions } from '../actions/pagination';
 
-function* getCharacters() {
+function* getCharacters({ payload }) {
+  const page = payload;
   try {
-    const characters = yield call(getCharactersService);
+    const characters = yield call(getCharactersService, { page });
     yield put({
       type: charactersActionTypes.GET_CHARACTERS_SUCCEDED,
       payload: { characters: createCharacters(characters) },
     });
+    yield put(paginationActions.receivePage(page, 'characters', characters));
   } catch (e) {
     yield put({ type: charactersActionTypes.GET_CHARACTERS_FAILED, payload: { error: createError(e) } });
   }

@@ -1,23 +1,32 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { paginationActionsCreators } from '../../domain/actions/pagination';
 import { selectPagination } from '../../domain/selectors/pagination';
 import useBindActionCreators from './useBindActionCreators';
 import { useRouter } from './useRouter';
 
-const usePagination = () => {
+const usePagination = (entity) => {
   const paginationActions = useBindActionCreators(paginationActionsCreators);
   const pagination = useSelector(selectPagination) || {};
-  const { push } = useRouter();
+  const { push, query } = useRouter();
+  const { page = '1' } = query;
+  const newPage = parseInt(page);
+  const [prevPage, setPrevPage] = useState();
 
-  const goToPage = (page, entity) => {
-    console.log('🚀 ~ file: usePagination.js ~ line 13 ~ goToPage ~ page', page);
-    push(`?page=${page}`);
-    paginationActions.requestPage(page, entity);
+  const goToPage = (pageTo) => {
+    push(`?page=${pageTo}`);
   };
 
-  const actualPage = (entity) => {
+  useEffect(() => {
+    entity && paginationActions.requestPage(newPage, entity);
+  }, [newPage, prevPage, paginationActions, setPrevPage, entity]);
+
+  const actualPage = () => {
     const entityPagination = pagination[entity] || {};
-    return entityPagination.currentPage;
+    return {
+      pageHasChanged: prevPage !== entityPagination.currentPage,
+      actualPageId: entityPagination.currentPage,
+    };
   };
 
   return {

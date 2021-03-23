@@ -18,12 +18,14 @@ const charactersReducer = (state = initialState, { type, payload = {} }) => {
       };
 
     case charactersActionTypes.GET_CHARACTERS_SUCCEDED: {
+      const { characters: prevCharacters } = state;
       const { characters = [] } = payload;
       return {
         ...state,
         charactersLoading: false,
         characters: characters.reduce((chs, ch) => {
           return {
+            ...prevCharacters,
             ...chs,
             [ch.id]: ch,
           };

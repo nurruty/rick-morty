@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRouter } from './useRouter';
 import { useEffect } from 'react';
 import { charactersActionsCreators } from '../../domain/actions/characters';
@@ -10,11 +10,11 @@ const useCharacter = () => {
   const charactersActions = useBindActionCreators(charactersActionsCreators);
   const { characters = {}, charactersLoading = false, charactersError } = useSelector(charactersSelector);
   const { query = {} } = useRouter();
-  const { actualPage } = usePagination();
-  const { characterId, page = 1 } = query;
+  const { actualPage } = usePagination('characters');
+  const { characterId } = query;
   const character = characters[characterId];
   const numCharacters = Object.values(characters).length;
-  const actualPageId = actualPage('characters');
+  const { actualPageId } = actualPage();
 
   const updateFavouriteCharacter = (favCharacter) => {
     !favCharacter.isFavourite
@@ -25,8 +25,8 @@ const useCharacter = () => {
   useEffect(() => {
     characterId
       ? charactersActions.getCharacterRequested(characterId)
-      : (numCharacters === 0 || page !== actualPageId) && charactersActions.getCharactersRequested(page);
-  }, [charactersActions, characterId, numCharacters, actualPageId, page]);
+      : numCharacters === 0 && charactersActions.getCharactersRequested(actualPageId);
+  }, [charactersActions, characterId, numCharacters, actualPageId]);
 
   return {
     characters: Object.values(characters),

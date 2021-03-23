@@ -17,8 +17,6 @@ const charactersSelector = (state) => {
         [key]: characters[key],
       };
     }, {});
-  } else {
-    pageCharacters = characters;
   }
 
   return { characters: pageCharacters, charactersLoading, charactersError };

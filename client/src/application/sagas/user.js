@@ -1,10 +1,9 @@
 import { userActionTypes } from '../actions/user';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getCurrentUserService, loginUserService } from '../services/user';
-import { createError } from '../entities/error';
-import { createUser } from '../entities/user';
+import { createError } from '../../domain/entities/error';
+import { createUser } from '../../domain/entities/user';
 
-function* getCurrentUser() {
+function* getCurrentUser({ getCurrentUserService }) {
   try {
     const user = yield call(getCurrentUserService);
 
@@ -14,7 +13,7 @@ function* getCurrentUser() {
   }
 }
 
-function* loginUser({ payload }) {
+function* loginUser({ payload, loginUserService }) {
   const { email, password, push } = payload;
   try {
     const user = yield call(loginUserService, { email, password });

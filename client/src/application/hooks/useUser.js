@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { userActionCreators } from '../../domain/actions/user';
-import userSelector from '../../domain/selectors/user';
+import { userActionCreators } from '../actions/user';
+import userSelector from '../selectors/user';
 import useBindActionCreators from './useBindActionCreators';
 import { useRouter } from './useRouter';
 

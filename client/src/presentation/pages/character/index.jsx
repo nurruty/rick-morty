@@ -2,7 +2,7 @@ import './Character.scss';
 import React from 'react';
 import Profile from '../../components/Profile/Profile';
 import TextRow from '../../components/TextRow/TextRow';
-import useCharacters from '../../hooks/useCharacters';
+import useCharacters from '../../../application/hooks/useCharacters';
 import Icon from '../../components/Icon/Icon';
 
 const Character = () => {

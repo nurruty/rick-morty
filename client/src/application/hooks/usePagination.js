@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { paginationActionsCreators } from '../../domain/actions/pagination';
-import { selectPagination } from '../../domain/selectors/pagination';
+import { paginationActionsCreators } from '../actions/pagination';
+import { selectPagination } from '../selectors/pagination';
 import useBindActionCreators from './useBindActionCreators';
 import { useRouter } from './useRouter';
 

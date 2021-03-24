@@ -1,16 +1,10 @@
 import { charactersActionTypes } from '../actions/characters';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import {
-  getCharactersService,
-  getCharacterService,
-  addFavouriteCharacterService,
-  deleteFavouriteCharacterService,
-} from '../services/characters';
-import { createError } from '../entities/error';
-import { createCharacters, createCharacter, setFavouriteCharacter } from '../entities/character';
+import { createError } from '../../domain/entities/error';
+import { createCharacters, createCharacter, setFavouriteCharacter } from '../../domain/entities/character';
 import { paginationActionsCreators } from '../actions/pagination';
 
-function* getCharacters({ payload }) {
+function* getCharacters({ payload, getCharactersService }) {
   const page = payload;
   try {
     const characters = yield call(getCharactersService, { page });
@@ -26,7 +20,7 @@ function* getCharacters({ payload }) {
   }
 }
 
-function* getCharacter({ payload }) {
+function* getCharacter({ payload, getCharacterService }) {
   const characterId = payload;
   try {
     const character = yield call(getCharacterService, { characterId });
@@ -39,7 +33,7 @@ function* getCharacter({ payload }) {
   }
 }
 
-function* addFavouriteCharacter({ payload }) {
+function* addFavouriteCharacter({ payload, addFavouriteCharacterService }) {
   const character = payload;
   try {
     yield call(addFavouriteCharacterService, { characterId: character.id });
@@ -55,7 +49,7 @@ function* addFavouriteCharacter({ payload }) {
   }
 }
 
-function* deleteFavouriteCharacter({ payload }) {
+function* deleteFavouriteCharacter({ payload, deleteFavouriteCharacterService }) {
   const character = payload;
   try {
     yield call(deleteFavouriteCharacterService, { characterId: character.id });

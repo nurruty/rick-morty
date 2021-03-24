@@ -1,12 +1,10 @@
 import './Login.scss';
 import React from 'react';
 import { useFormik } from 'formik';
-import useUser from '../../hooks/useUser';
-import { useRouter } from '../../hooks/useRouter';
+import useUser from '../../../application/hooks/useUser';
 
 const LoginPage = () => {
   const { loginUser } = useUser();
-  const { push } = useRouter();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -14,7 +12,6 @@ const LoginPage = () => {
     },
     onSubmit: (values) => {
       loginUser(values);
-      //push('/');
     },
   });
   return (

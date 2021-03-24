@@ -1,5 +1,4 @@
 import React from 'react';
-import TextRow from '../TextRow/TextRow';
 import './Card.scss';
 
 const Card = ({ imgSrc, info, actionComponent, isMobile }) => {

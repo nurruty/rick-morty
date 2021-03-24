@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './application/App';
+import App from './presentation/App';
 import { Provider } from 'react-redux';
-import configureStore from './infrastructure/store';
+import configureStore from './application/store';
+import apiServices from './infrastructure/api';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const store = configureStore();
+// Inject services
+const store = configureStore(apiServices);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store()}>
     <Router>
       <App />
     </Router>

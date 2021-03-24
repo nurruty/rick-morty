@@ -8,7 +8,7 @@ import GuestRoute from './components/Routes/GuestRoute';
 import HomePage from './pages/home';
 import Error404Page from './pages/error';
 import Character from './pages/character';
-import useUser from './hooks/useUser';
+import useUser from '../application/hooks/useUser';
 
 function AppComponent(props) {
   //const [state, setState] = useState({ isMobileSize: isMobile() });

@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useRouter } from './useRouter';
 import { useEffect } from 'react';
-import { charactersActionsCreators } from '../../domain/actions/characters';
-import { selectCharacters } from '../../domain/selectors/characters';
+import { charactersActionsCreators } from '../actions/characters';
+import { selectCharacters } from '../selectors/characters';
 import useBindActionCreators from './useBindActionCreators';
 import usePagination from './usePagination';
 

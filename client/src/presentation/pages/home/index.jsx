@@ -1,11 +1,11 @@
 import './Home.scss';
 import React from 'react';
 import Card from '../../components/Card/Card';
-import useCharacters from '../../hooks/useCharacters';
-import { useRouter } from '../../hooks/useRouter';
+import useCharacters from '../../../application/hooks/useCharacters';
+import { useRouter } from '../../../application/hooks/useRouter';
 import TextRow from '../../components/TextRow/TextRow';
 import Icon from '../../components/Icon/Icon';
-import usePagination from '../../hooks/usePagination';
+import usePagination from '../../../application/hooks/usePagination';
 
 const HomePage = () => {
   const { characters, updateFavouriteCharacter } = useCharacters();

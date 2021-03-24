@@ -1,0 +1,13 @@
+FROM node:10-alpine as generator
+WORKDIR /data
+COPY . .
+#CMD mongoimport --collection User --file seed.json --jsonArray --uri "mongodb://mongo:27017"
+RUN npm install mongoose bcryptjs
+RUN node ./seedUsers.js
+
+# FROM mongo:latest
+
+# COPY . .
+# COPY --from=generator ./data/ .
+# RUN ["chmod", "+x", "init.sh"]
+# CMD ["node","seedUsers.js"]

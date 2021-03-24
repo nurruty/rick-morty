@@ -33,7 +33,7 @@ client
        └ scss             → General styling variables
        └ App.jsx          → Application sources
     └ utils               → Application sources
-
+    └ index.js               → Application sources
 ```
 
 ## Main Dependecies

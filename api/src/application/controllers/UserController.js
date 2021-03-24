@@ -3,21 +3,16 @@ const GetCurrentUserUC = require('../use_cases/user/GetCurrentUser');
 const AddFavouriteCharacterUC = require('../use_cases/user/AddFavouriteCharacter');
 const RemoveFavouriteCharacterUC = require('../use_cases/user/RemoveFavouriteCharacter');
 
-const UserRepository = require('../../infrastructure/db/mongoose/repositories/UserRepository');
 const UserService = require('../../domain/services/UserService');
 const EncryptionService = require('../../domain/services/EncryptionService');
 
-const getUser = async ({ email }) => {
-  const userRepository = new UserRepository();
-
+const getUser = async ({ email, userRepository }) => {
   const user = await GetCurrentUserUC({ email, userRepository });
 
   return user;
 };
 
-const loginUser = async ({ email, password }) => {
-  const userRepository = new UserRepository();
-
+const loginUser = async ({ email, password, userRepository }) => {
   const user = await LoginUserUC(email, password, {
     userRepository,
     userService: UserService,
@@ -27,9 +22,7 @@ const loginUser = async ({ email, password }) => {
   return user;
 };
 
-const addFavouriteCharacterUser = async ({ email, characterId }) => {
-  const userRepository = new UserRepository();
-
+const addFavouriteCharacterUser = async ({ email, characterId, userRepository }) => {
   await AddFavouriteCharacterUC({
     email,
     characterId,
@@ -37,9 +30,7 @@ const addFavouriteCharacterUser = async ({ email, characterId }) => {
   });
 };
 
-const deleteFavouriteCharacterUser = async ({ email, characterId }) => {
-  const userRepository = new UserRepository();
-
+const deleteFavouriteCharacterUser = async ({ email, characterId, userRepository }) => {
   await RemoveFavouriteCharacterUC({
     email,
     characterId,

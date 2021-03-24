@@ -1,12 +1,14 @@
 'use strict';
 
+const { errorNotFound } = require('../errors');
+
 module.exports = async ({ email, userRepository }) => {
   try {
     const user = await userRepository.getByEmail(email);
 
-    if (!user) throw new Error('User not found');
+    if (!user) throw errorNotFound();
     return user;
   } catch (e) {
-    throw new Error(e);
+    throw e;
   }
 };

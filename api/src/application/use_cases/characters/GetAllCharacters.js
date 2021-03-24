@@ -2,13 +2,14 @@
 
 const { setIsFavourite } = require('../../../domain/entities/Character');
 const { hasFavouriteCharacter } = require('../../../domain/entities/User');
+const { errorNotFound } = require('../errors');
 
 module.exports = async ({ userEmail, page, charactersRepository, userRepository }) => {
   try {
     const characters = await charactersRepository.get(page);
     const user = await userRepository.getByEmail(userEmail);
 
-    if (!characters) throw new Error('Characters not found');
+    if (!characters) throw errorNotFound();
 
     if (user) {
       return characters.map((character) =>
@@ -18,6 +19,6 @@ module.exports = async ({ userEmail, page, charactersRepository, userRepository 
 
     return characters;
   } catch (e) {
-    throw new Error(e);
+    throw e;
   }
 };

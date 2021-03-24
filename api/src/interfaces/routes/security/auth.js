@@ -25,7 +25,7 @@ const verifyToken = async (req, res, next) => {
     req.uData = decrypt;
     next();
   } catch (err) {
-    return res.status(500).json(err.toString());
+    return res.status(401).json(err.toString());
   }
 };
 

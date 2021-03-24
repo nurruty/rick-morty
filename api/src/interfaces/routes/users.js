@@ -4,58 +4,66 @@ var { verifyToken, generateToken } = require('./security/auth');
 
 const UserController = require('../../application/controllers/UserController');
 
-router.get('/', verifyToken, function (req, res, next) {
-  const { getUser } = UserController;
-  const { uData } = req;
+const UserRouter = ({ userRepository }) => {
+  router.get('/', verifyToken, function (req, res, next) {
+    const { getUser } = UserController;
+    const { uData } = req;
 
-  getUser({ email: uData.email })
-    .then((user) => {
-      res.send(user);
-    })
-    .catch((error) => {
-      res.status(500).send('Error');
-    });
-});
+    getUser({ email: uData.email, userRepository })
+      .then((user) => {
+        res.send(user);
+      })
+      .catch((error = {}) => {
+        const { code = 500 } = error;
+        res.status(code).send(error);
+      });
+  });
 
-router.post('/login', function (req, res, next) {
-  const { loginUser } = UserController;
-  const { body } = req;
+  router.post('/login', function (req, res, next) {
+    const { loginUser } = UserController;
+    const { body } = req;
 
-  loginUser(body)
-    .then((user) => {
-      generateToken(res, user).send(user);
-    })
-    .catch((error) => {
-      res.status(500).send('Error');
-    });
-});
+    loginUser({ ...body, userRepository })
+      .then((user) => {
+        generateToken(res, user).send(user);
+      })
+      .catch((error = {}) => {
+        const { code = 500 } = error;
+        res.status(code).send(error);
+      });
+  });
 
-router.post('/character', verifyToken, function (req, res, next) {
-  const { addFavouriteCharacterUser } = UserController;
-  const { body } = req;
-  const { uData } = req;
+  router.post('/character', verifyToken, function (req, res, next) {
+    const { addFavouriteCharacterUser } = UserController;
+    const { body } = req;
+    const { uData } = req;
 
-  addFavouriteCharacterUser({ ...uData, ...body })
-    .then((user) => {
-      res.send(user);
-    })
-    .catch((error) => {
-      res.status(500).send('Error');
-    });
-});
+    addFavouriteCharacterUser({ ...uData, ...body, userRepository })
+      .then((user) => {
+        res.send(user);
+      })
+      .catch((error = {}) => {
+        const { code = 500 } = error;
+        res.status(code).send(error);
+      });
+  });
 
-router.delete('/character/:id', verifyToken, function (req, res, next) {
-  const { deleteFavouriteCharacterUser } = UserController;
-  const { uData, params } = req;
-  const { id } = params;
+  router.delete('/character/:id', verifyToken, function (req, res, next) {
+    const { deleteFavouriteCharacterUser } = UserController;
+    const { uData, params } = req;
+    const { id } = params;
 
-  deleteFavouriteCharacterUser({ ...uData, characterId: id })
-    .then((user) => {
-      res.send(user);
-    })
-    .catch((error) => {
-      res.status(500).send('Error');
-    });
-});
+    deleteFavouriteCharacterUser({ ...uData, characterId: id, userRepository })
+      .then((user) => {
+        res.send(user);
+      })
+      .catch((error = {}) => {
+        const { code = 500 } = error;
+        res.status(code).send(error);
+      });
+  });
 
-module.exports = router;
+  return router;
+};
+
+module.exports = UserRouter;

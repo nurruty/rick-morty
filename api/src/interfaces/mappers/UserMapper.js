@@ -1,7 +1,7 @@
 const { createUser } = require('../../domain/entities/User');
 
 const toEntity = (dbUser) => {
-  const { id, email, password, favourite_characters } = dbUser;
+  const { id, email, password, favourite_characters } = dbUser || {};
   return dbUser ? createUser({ id, email, password, favouriteCharacters: favourite_characters }) : dbUser;
 };
 

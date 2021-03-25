@@ -32,6 +32,7 @@ const server = http.createServer(App);
  * Listen on provided port, on all network interfaces.
  */
 
+console.log('Starting api');
 server.listen(port, () => {
   console.log('Server started');
 });

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var { verifyToken, generateToken } = require('./security/auth');
+const { toResponse } = require('../mappers/UserMapper');
 
 const UserController = require('../../application/controllers/UserController');
 
@@ -11,7 +12,7 @@ const UserRouter = ({ userRepository }) => {
 
     getUser({ email: uData.email, userRepository })
       .then((user) => {
-        res.send(user);
+        res.send(toResponse(user));
       })
       .catch((error = {}) => {
         const { code = 500 } = error;
@@ -25,7 +26,7 @@ const UserRouter = ({ userRepository }) => {
 
     loginUser({ ...body, userRepository })
       .then((user) => {
-        generateToken(res, user).send(user);
+        generateToken(res, user).send(toResponse(user));
       })
       .catch((error = {}) => {
         const { code = 500 } = error;
@@ -40,7 +41,7 @@ const UserRouter = ({ userRepository }) => {
 
     addFavouriteCharacterUser({ ...uData, ...body, userRepository })
       .then((user) => {
-        res.send(user);
+        res.send(toResponse(user));
       })
       .catch((error = {}) => {
         const { code = 500 } = error;
@@ -55,7 +56,7 @@ const UserRouter = ({ userRepository }) => {
 
     deleteFavouriteCharacterUser({ ...uData, characterId: id, userRepository })
       .then((user) => {
-        res.send(user);
+        res.send(toResponse(user));
       })
       .catch((error = {}) => {
         const { code = 500 } = error;

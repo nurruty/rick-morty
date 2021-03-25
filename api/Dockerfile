@@ -9,8 +9,6 @@ COPY yarn.lock /api/
 
 RUN yarn install
 
-RUN npm run seed
-
 COPY . /api/
 
 EXPOSE 80

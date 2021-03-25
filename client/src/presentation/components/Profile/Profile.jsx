@@ -1,8 +1,9 @@
 import './Profile.scss';
 
-const Profile = ({ imgSrc, profileInfo, actionComponent }) => {
+const Profile = ({ imgSrc, profileInfo, actionComponent, isMobileSize }) => {
+  const mobileClass = isMobileSize ? ' Profile_mobile' : '';
   return (
-    <div className="Profile">
+    <div className={'Profile' + mobileClass}>
       <div className="Profile-main">
         <div className="Profile-img">
           <img src={imgSrc} alt="" />

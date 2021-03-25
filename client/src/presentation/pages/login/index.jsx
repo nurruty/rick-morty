@@ -3,7 +3,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import useUser from '../../../application/hooks/useUser';
 
-const LoginPage = () => {
+const LoginPage = ({ isMobileSize }) => {
   const { loginUser } = useUser();
   const formik = useFormik({
     initialValues: {
@@ -14,8 +14,10 @@ const LoginPage = () => {
       loginUser(values);
     },
   });
+
+  const mobileClass = isMobileSize ? ' Login_mobile' : '';
   return (
-    <div className="Login">
+    <div className={'Login' + mobileClass}>
       <form onSubmit={formik.handleSubmit}>
         <div className="Login-fields">
           <input

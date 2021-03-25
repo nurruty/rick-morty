@@ -9,21 +9,27 @@ import HomePage from './pages/home';
 import Error404Page from './pages/error';
 import Character from './pages/character';
 import useUser from '../application/hooks/useUser';
+import { useEffect, useState } from 'react';
 
 function AppComponent(props) {
-  //const [state, setState] = useState({ isMobileSize: isMobile() });
+  const [isMobileSize, setIsMobileSize] = useState(isMobile());
   const { user } = useUser();
   const { isLoggedIn = false } = user || {};
 
-  // const handleResize = () => {
-  //   const isMobileSize = isMobile();
-  //   if (state.isMobile !== isMobile) {
-  //     setState({ isMobileSize });
-  //   }
-  // };
+  const handleResize = () => {
+    if (isMobileSize !== isMobile()) {
+      setIsMobileSize(isMobile());
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+  });
+
+  const mobileClass = isMobileSize ? ' App_mobile' : '';
 
   return (
-    <div className="App">
+    <div className={'App' + mobileClass}>
       <header>
         <h1 className="App-heading">
           Rick <span>And</span> Morty
@@ -32,15 +38,28 @@ function AppComponent(props) {
       {user && (
         <Router>
           <Switch>
-            <GuestRoute isLoggedIn={isLoggedIn} exact path="/login" component={LoginPage} />
+            <GuestRoute
+              isMobileSize={isMobileSize}
+              isLoggedIn={isLoggedIn}
+              exact
+              path="/login"
+              component={LoginPage}
+            />
             <ProtectedRoute
               exact
               path="/character/:characterId"
               isLoggedIn={isLoggedIn}
               component={Character}
+              isMobileSize={isMobileSize}
             />
-            <ProtectedRoute exact path="/" component={HomePage} isLoggedIn={isLoggedIn} />
-            <Route component={Error404Page} />
+            <ProtectedRoute
+              exact
+              path="/"
+              component={HomePage}
+              isLoggedIn={isLoggedIn}
+              isMobileSize={isMobileSize}
+            />
+            <Route component={Error404Page} isMobileSize={isMobileSize} />
           </Switch>
         </Router>
       )}

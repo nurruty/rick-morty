@@ -13,7 +13,7 @@ COPY . /client
 
 RUN npm run build
 
-CMD ["npm", "start"]
+CMD ["npm", "server"]
 
 # # Use a lighter version of Node as a parent image
 # FROM mhart/alpine-node:14.16.0

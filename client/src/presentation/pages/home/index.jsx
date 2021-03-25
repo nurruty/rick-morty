@@ -21,8 +21,8 @@ const HomePage = () => {
     updateFavouriteCharacter && updateFavouriteCharacter(character);
   };
 
-  const handleClickPage = () => {
-    const nextPage = parseInt(page) + 1;
+  const handleClickPage = (npage) => {
+    const nextPage = npage;
     goToPage(nextPage, 'characters');
   };
 
@@ -67,7 +67,14 @@ const HomePage = () => {
           );
         })}
       </div>
-      <button onClick={() => handleClickPage()}>NEXT</button>
+      <div className="buttons">
+        <button className="previous" onClick={() => handleClickPage(parseInt(page) - 1)}>
+          &#8249;
+        </button>
+        <button className="next" onClick={() => handleClickPage(parseInt(page) + 1)}>
+          &#8250;
+        </button>
+      </div>
     </div>
   );
 };

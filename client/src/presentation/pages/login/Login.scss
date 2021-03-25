@@ -1,9 +1,8 @@
 @import '../../scss/variables.scss';
 
 .Login {
-  width: 500px;
+  max-width: 500px;
   margin: auto;
-  //background-color: $gray-dark;
   padding: 20px;
   border-radius: 5px;
   border: none;
@@ -44,12 +43,20 @@
       margin: auto;
       color: #fff;
       border-radius: 4px;
-      background: #7ffa67 !important;
+      background: $green !important;
       text-decoration: none;
       padding: 10px;
       transition: all 0.4s;
       line-height: normal;
       border: none;
+    }
+  }
+
+  &_mobile {
+    .Login {
+      &-fields {
+        padding: 0;
+      }
     }
   }
 }

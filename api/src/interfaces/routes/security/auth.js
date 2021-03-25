@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const generateToken = (res, data) => {
-  const expiration = 605800000;
+  const expiration = process.env.COOKIE_EXPIRATION || 605800000;
   const token = jwt.sign(data, process.env.JWT_SECRET, {
     expiresIn: process.env.DB_ENV === 'testing' ? '1d' : '7d',
   });

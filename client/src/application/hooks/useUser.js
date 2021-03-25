@@ -15,7 +15,7 @@ const useUser = () => {
   }, [user, userActions]);
 
   const loginUser = ({ email = '', password = '' }) => {
-    userActions.loginUser({ email, password, push });
+    userActions.loginUserRequested({ email, password, push });
   };
 
   return { user, userLoading, userError, loginUser };

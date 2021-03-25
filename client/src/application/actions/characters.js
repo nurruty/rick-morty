@@ -23,11 +23,11 @@ const charactersActionsCreators = {
   }),
   getCharactersSucceded: (characters) => ({
     type: charactersActionTypes.GET_CHARACTERS_SUCCEDED,
-    payload: characters,
+    payload: { characters },
   }),
   getCharactersFailed: (error) => ({
     type: charactersActionTypes.GET_CHARACTERS_FAILED,
-    payload: error,
+    payload: { error },
   }),
 
   getCharacterRequested: (characterId) => ({
@@ -36,7 +36,7 @@ const charactersActionsCreators = {
   }),
   getCharacterSucceded: (character) => ({
     type: charactersActionTypes.GET_CHARACTER_SUCCEDED,
-    payload: character,
+    payload: { character },
   }),
   getCharacterFailed: (error) => ({
     type: charactersActionTypes.GET_CHARACTER_FAILED,

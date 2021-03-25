@@ -81,4 +81,5 @@ const watchDeleteFavouriteCharacter = function* () {
   yield takeLatest(charactersActionTypes.DELETE_FAVOURITE_CHARACTER_REQUESTED, deleteFavouriteCharacter);
 };
 
+export { getCharacters, getCharacter, addFavouriteCharacter, deleteFavouriteCharacter };
 export { watchGetCharacters, watchGetCharacter, watchAddFavouriteCharacter, watchDeleteFavouriteCharacter };

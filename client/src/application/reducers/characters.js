@@ -1,12 +1,12 @@
 import { charactersActionTypes } from '../actions/characters';
 
-const initialState = {
+const charactersInitialState = {
   charactersLoading: false,
   characters: {},
   charactersEerror: null,
 };
 
-const charactersReducer = (state = initialState, { type, payload = {} }) => {
+const charactersReducer = (state = charactersInitialState, { type, payload = {} }) => {
   switch (type) {
     case charactersActionTypes.GET_CHARACTERS_REQUESTED:
     case charactersActionTypes.GET_CHARACTER_REQUESTED:
@@ -56,7 +56,7 @@ const charactersReducer = (state = initialState, { type, payload = {} }) => {
       return {
         ...state,
         charactersLoading: false,
-        charactersEerror: error,
+        charactersError: error,
       };
     }
 
@@ -66,3 +66,4 @@ const charactersReducer = (state = initialState, { type, payload = {} }) => {
 };
 
 export default charactersReducer;
+export { charactersInitialState };

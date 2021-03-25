@@ -1,12 +1,12 @@
 import { userActionTypes } from '../actions/user';
 
-const initialState = {
+const userInitialState = {
   userLoading: false,
   user: undefined,
   userEerror: null,
 };
 
-const userReducer = (state = initialState, { type, payload = {} }) => {
+const userReducer = (state = userInitialState, { type, payload = {} }) => {
   switch (type) {
     case userActionTypes.GET_CURRENT_USER_REQUESTED:
     case userActionTypes.LOGIN_USER_REQUESTED:
@@ -36,7 +36,7 @@ const userReducer = (state = initialState, { type, payload = {} }) => {
           email: undefined,
           isLoggedIn: false,
         },
-        error,
+        userError: error,
       };
 
     default:
@@ -45,3 +45,4 @@ const userReducer = (state = initialState, { type, payload = {} }) => {
 };
 
 export default userReducer;
+export { userInitialState };

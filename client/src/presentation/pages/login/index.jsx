@@ -40,7 +40,7 @@ const LoginPage = ({ isMobileSize }) => {
             onChange={formik.handleChange}
             value={formik.values.password}
           />
-          {userError && <div className="error">Try Again!</div>}
+          {userError && userError.code && <div className="error">Try Again!</div>}
           <button type="submit">Log In</button>
         </div>
       </form>

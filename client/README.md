@@ -1,5 +1,5 @@
 # Front End
-Trying to also follow the same design principles, the front end is also structured in a clean architecture approach.
+Trying follow the same design principles, the front end is also structured in a clean architecture approach.
 
 ### Presentation:
 Here is where the different views are. There are two main types of Components. Dummy components, whose only resposibility es to draw data on the screen. Then the different pages, each related to a specific route. Pages are what are usually called containers. This kind of components communicate with the application layer using hooks. Every user interaction with the system is captured in this layer and passed down to the application.

@@ -31,7 +31,7 @@ const userActionCreators = {
 
   loginUserRequested: (data) => ({
     type: userActionTypes.LOGIN_USER_REQUESTED,
-    payload: { user: data },
+    payload: data,
   }),
 
   loginUserSucceded: (user) => ({

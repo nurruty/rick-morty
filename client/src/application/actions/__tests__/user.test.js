@@ -23,12 +23,12 @@ describe('User Actions', () => {
     expect(result.payload).toEqual({ error });
   });
 
-  test('loginUser', () => {
-    const user = 'mockuser';
+  test('loginUserRequested', () => {
+    const user = 'user';
     const result = userActionCreators.loginUserRequested(user);
 
     expect(result.type).toEqual(userActionTypes.LOGIN_USER_REQUESTED);
-    expect(result.payload).toEqual({ user });
+    expect(result.payload).toEqual(user);
   });
 
   test('loginUserSucceeded', () => {

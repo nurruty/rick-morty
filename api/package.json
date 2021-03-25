@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "seed": "node ./scripts/seedUsers"
+    "seed": "node ./scripts/seedUsers.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

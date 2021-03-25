@@ -1,48 +1,86 @@
-version: "2"
+# version: '2'
 
+# services:
+#   # client:
+#   #     image: nurruty/rick-morty-client:dev
+#   #     restart: always
+#   #     ports:
+#   #         - "3000:3000"
+#   #     volumes:
+#   #         - ./client:/client
+#   #         - /client/node_modules
+#   #     links:
+#   #         - api
+#   #     networks:
+#   #         - webappnetwork
+#   # api:
+#   #     image: nurruty/rick-morty-api:dev
+#   #     restart: always
+#   #     ports:
+#   #         - "9000:9000"
+#   #     volumes:
+#   #         - ./api:/api
+#   #         - /api/node_modules
+#   #     depends_on:
+#   #         - mongodb
+#   #     networks:
+#   #         - webappnetwork
+#   mongo-seed:
+#     image: fvilers/mongo-seed
+#   environment:
+#     - MONGO_HOST=mongo
+#     - MONGO_PORT=27017
+#   volumes: ./data:/data
+#   command: 'mongoimport --host mongo --port 27017 --db test --collection users --mode upsert --type json --file /data/init.json --jsonArray'
+
+#   mongo:
+#     image: mongo:3.4
+# networks:
+#   webappnetwork:
+#     driver: bridge
+version: '3'
 
 services:
-    client:
-        image: nurruty/rick-morty-client:dev
-        restart: always
-        ports:
-            - "3000:3000"
-        volumes:
-            - ./client:/client
-            - /client/node_modules
-        links:
-            - api
-        networks:
-            - webappnetwork
-    api:
-        image: nurruty/rick-morty-api:dev
-        restart: always
-        ports:
-            - "9000:9000"
-        volumes:
-            - ./api:/api
-            - /api/node_modules
-        depends_on:
-            - mongodb
-        networks:
-            - webappnetwork
-    mongodb:
-        image: mongo
-        restart: always
-        container_name: mongodb
-        volumes:
-            - ./data-node:/data/db
-        ports:
-            - 27017:27017
-        command: mongod --noauth
-        networks:
-            - webappnetwork
-    # dbseed:
-    #     build:
-    #         context: ./api/scripts
-    #         dockerfile: Dockerfile.dev
-    #     depends_on:
-    #         - mongodb
+  client:
+    image: nurruty/rick-morty-client:dev
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+    links:
+      - api
+    networks:
+      - webappnetwork
+  api:
+    image: nurruty/rick-morty-api:dev
+    restart: always
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./api:/api
+      - /api/node_modules
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/test
+    depends_on:
+      - mongo
+    networks:
+      - webappnetwork
+  mongo-seed:
+    image: fvilers/mongo-seed
+    environment:
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+    volumes:
+      - ./api/data:/api/data
+    command: 'mongoimport --host mongo --port 27017 --db test --collection users --mode upsert --type json --file /api/data/init.json --jsonArray'
+    networks:
+      - webappnetwork
+  mongo:
+    image: mongo:3.4
+    networks:
+      - webappnetwork
 networks:
-    webappnetwork:
-        driver: bridge
+  webappnetwork:
+    driver: bridge

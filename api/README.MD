@@ -7,14 +7,18 @@ This implementation tries to follow the different guidelines and structure this 
 
 
 ### Application layer: 
-  The application layer is in charge of orchestrating the business different use cases. 
+  The application layer is in charge of orchestrating the different business use cases. Here is where the different controllers are. Each of them has the resposibility of calling an specific use case. They are in charge of injecting other necesarry components to the use case, such as repositories or other application services.
+  
 ### Domain layer:
-  Core layer where all business objects (Aggregates, Entities, Value Objects) coexist.
+  Core layer where all business objects (Aggregates, Entities, Value Objects) coexist. This layer is framework agnostic, and does not know anything of any outer layer. Here also are come domain services thay may help interact entities from different entities.
+  
 ### Infrastructure layer:
-  Framework specific components that support the application layer with interfaces implementations. (Web server, database, logging). 
+  Framework specific components that support the application layer with interfaces implementations. (Web server, database, logging). Here 
+  
 ### Intefaces:  
-  Adapters and data mappers
-
+  Adapters and data mappers.
+ 
+ 
 ```
 api 
  └ bin                     

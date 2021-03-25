@@ -39,3 +39,8 @@ npm run start
 The Docker installation comes with 2 seeded users:
   - user: rick@gmail.com, pass: testPass
   - user: morty@gmail.com, pass: testPass 
+ 
+### Further work
+- Add more tests
+- Signup page
+- Image caching

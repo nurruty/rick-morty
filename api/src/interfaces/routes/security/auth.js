@@ -4,7 +4,7 @@ dotenv.config();
 
 const generateToken = (res, data) => {
   const expiration = process.env.COOKIE_EXPIRATION || 605800000;
-  const token = jwt.sign(data, process.env.JWT_SECRET, {
+  const token = jwt.sign(data, process.env.JWT_SECRET || 'testSecret', {
     expiresIn: process.env.DB_ENV === 'testing' ? '1d' : '7d',
   });
 
@@ -21,7 +21,7 @@ const verifyToken = async (req, res, next) => {
     if (!token) {
       return res.status(401).json('You need to Login');
     }
-    const decrypt = await jwt.verify(token, process.env.JWT_SECRET);
+    const decrypt = await jwt.verify(token, process.env.JWT_SECRET || 'testSecret');
     req.uData = decrypt;
     next();
   } catch (err) {

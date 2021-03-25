@@ -25,7 +25,6 @@ const Character = ({ isMobileSize }) => {
   };
 
   const mobileClass = isMobileSize ? ' Character_mobile' : '';
-  console.log('🚀 ~ file: index.jsx ~ line 28 ~ Character ~ isMobileSize', isMobileSize);
 
   return (
     <div className={'Character' + mobileClass}>

@@ -9,10 +9,10 @@ const getCharacters = async ({ userEmail, page, charactersRepository, userReposi
   return characters.map(toResponse);
 };
 
-const getCharacter = async ({ id, email, charactersRepository, userRepository }) => {
+const getCharacter = async ({ id, userEmail, charactersRepository, userRepository }) => {
   const character = await GetCharacterUC({
     characterId: id,
-    userEmail: email,
+    userEmail,
     charactersRepository,
     userRepository,
   });

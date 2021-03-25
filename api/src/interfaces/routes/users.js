@@ -40,8 +40,8 @@ const UserRouter = ({ userRepository }) => {
     const { uData } = req;
 
     addFavouriteCharacterUser({ ...uData, ...body, userRepository })
-      .then((user) => {
-        res.send(toResponse(user));
+      .then(() => {
+        res.send();
       })
       .catch((error = {}) => {
         const { code = 500 } = error;
@@ -55,8 +55,8 @@ const UserRouter = ({ userRepository }) => {
     const { id } = params;
 
     deleteFavouriteCharacterUser({ ...uData, characterId: id, userRepository })
-      .then((user) => {
-        res.send(toResponse(user));
+      .then(() => {
+        res.send();
       })
       .catch((error = {}) => {
         const { code = 500 } = error;

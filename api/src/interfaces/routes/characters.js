@@ -29,7 +29,6 @@ const CharactersRouter = ({ charactersRepository, userRepository }) => {
         res.send(character);
       })
       .catch((error = {}) => {
-        console.log('🚀 ~ file: characters.js ~ line 32 ~ error', error);
         const { code = 500 } = error;
         res.status(code).send(error);
       });

@@ -9,6 +9,10 @@ services:
     volumes:
       - ./client:/client
       - /client/node_modules
+    environment:
+      - JWT_SECRET=testSecret
+      - DB_ENV=testing
+      - COOKIE_EXPIRATION=620000
     links:
       - api
     networks:

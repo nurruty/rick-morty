@@ -1,5 +1,5 @@
-import { charactersActionsCreators } from '../actions/characters';
-import charactersReducer, { charactersInitialState } from '../reducers/characters';
+import { charactersActionsCreators } from '../../actions/characters';
+import charactersReducer, { charactersInitialState } from '../characters';
 
 describe('Characters Reducers', () => {
   test('Initial State', () => {

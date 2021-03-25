@@ -40,7 +40,7 @@ const charactersActionsCreators = {
   }),
   getCharacterFailed: (error) => ({
     type: charactersActionTypes.GET_CHARACTER_FAILED,
-    payload: error,
+    payload: { error },
   }),
 
   addFavouriteCharacterRequested: (character = {}) => ({
@@ -52,7 +52,7 @@ const charactersActionsCreators = {
   }),
   addFavouriteCharacterFailed: (error) => ({
     type: charactersActionTypes.ADD_FAVOURITE_CHARACTER_FAILED,
-    payload: error,
+    payload: { error },
   }),
 
   deleteFavouriteCharacterRequested: (character = {}) => ({
@@ -64,7 +64,7 @@ const charactersActionsCreators = {
   }),
   deleteFavouriteCharacterFailed: (error) => ({
     type: charactersActionTypes.DELETE_FAVOURITE_CHARACTER_FAILED,
-    payload: error,
+    payload: { error },
   }),
 };
 

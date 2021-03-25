@@ -14,7 +14,7 @@ const get = (path, params) => {
         resolve(data);
       })
       .catch((error) => {
-        const { response } = error;
+        const { response = {} } = error || {};
         const { data } = response;
         reject(data);
       });
@@ -33,7 +33,7 @@ const patch = (path, payload) => {
         resolve(data);
       })
       .catch((error) => {
-        const { response } = error;
+        const { response = {} } = error || {};
         const { data } = response;
         reject(data);
       });
@@ -52,7 +52,7 @@ const post = (path, payload) => {
         resolve(data);
       })
       .catch((error) => {
-        const { response } = error;
+        const { response = {} } = error || {};
         const { data } = response;
         reject(data);
       });
@@ -71,7 +71,7 @@ const remove = (path) => {
         resolve(data);
       })
       .catch((error) => {
-        const { response } = error;
+        const { response = {} } = error || {};
         const { data } = response;
         reject(data);
       });

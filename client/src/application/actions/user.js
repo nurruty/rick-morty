@@ -21,39 +21,27 @@ const userActionCreators = {
 
   getCurrentUserSucceded: (data) => ({
     type: userActionTypes.GET_CURRENT_USER_SUCCEDED,
-    payload: data,
+    payload: { user: data },
   }),
 
   getCurrentUserFailed: (error) => ({
     type: userActionTypes.GET_CURRENT_USER_FAILED,
-    payload: error,
+    payload: { error },
   }),
 
-  loginUser: (data) => ({
+  loginUserRequested: (data) => ({
     type: userActionTypes.LOGIN_USER_REQUESTED,
-    payload: data,
+    payload: { user: data },
   }),
 
-  loginUserSucceded: (data) => ({
+  loginUserSucceded: (user) => ({
     type: userActionTypes.LOGIN_USER_SUCCEDED,
-    payload: data,
+    payload: { user },
   }),
 
-  loginUserFailed: (data) => ({
+  loginUserFailed: (error) => ({
     type: userActionTypes.LOGIN_USER_FAILED,
-    payload: data,
-  }),
-
-  signupUser: (data) => ({
-    type: userActionTypes.SIGNUP_USER_REQUESTED,
-  }),
-
-  signupUserSucceded: (data) => ({
-    type: userActionTypes.SIGNUP_USER_SUCCEDED,
-  }),
-
-  signupUserFailed: (data) => ({
-    type: userActionTypes.SIGNUP_USER_FAILED,
+    payload: { error },
   }),
 };
 

@@ -1,5 +1,7 @@
 import { paginationActionTypes } from '../actions/pagination';
 
+const paginationInitialState = {};
+
 const paginationReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case paginationActionTypes.REQUEST_PAGE: {
@@ -37,3 +39,4 @@ const paginationReducer = (state = {}, { type, payload }) => {
 };
 
 export default paginationReducer;
+export { paginationInitialState };

@@ -5,9 +5,9 @@ import { createUser } from '../../domain/entities/user';
 
 function* getCurrentUser({ getCurrentUserService }) {
   try {
-    const user = yield call(getCurrentUserService);
+    const data = yield call(getCurrentUserService);
 
-    yield put({ type: userActionTypes.GET_CURRENT_USER_SUCCEDED, payload: { user: createUser(user) } });
+    yield put({ type: userActionTypes.GET_CURRENT_USER_SUCCEDED, payload: { user: createUser(data) } });
   } catch (e) {
     yield put({ type: userActionTypes.GET_CURRENT_USER_FAILED, payload: { error: createError(e) } });
   }
@@ -32,4 +32,5 @@ const watchLoginUser = function* () {
   yield takeLatest(userActionTypes.LOGIN_USER_REQUESTED, loginUser);
 };
 
+export { getCurrentUser, loginUser };
 export { watchGetCurrentUser, watchLoginUser };

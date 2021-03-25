@@ -1,11 +1,10 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const config = require('../../config');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const url = "mongodb://mongodb:27017"
-
-mongoose.connect(url, { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

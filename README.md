@@ -34,3 +34,8 @@ cd api
 npm install
 npm run start
 ```
+
+### Test Users
+The Docker installation comes with 2 seeded users:
+  - user: rick@gmail.com, pass: testPass
+  - user: morty@gmail.com, pass: testPass 

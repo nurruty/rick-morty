@@ -1,11 +1,5 @@
 # Backend
 
-Domain Driven Desing is a desing pattern 
-On …. Uncle Bob wrote his famous <article> where he detailed a series of principles to follow in order to build solid systems where user interface and framework specic apects didn’t mix with business logic.
-
-This implementation tries to follow the different guidelines and structure this …. Tell.
-
-
 ### Application layer: 
   The application layer is in charge of orchestrating the different business use cases. Here is where the different controllers are. Each of them has the resposibility of calling an specific use case. They are in charge of injecting other necesarry components to the use case, such as repositories or other application services.
   
